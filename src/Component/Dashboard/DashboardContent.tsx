@@ -3,7 +3,12 @@
 // import DashboardTables from "./DashboardTables";
 // import TodaysCard from "./TodaysCard";
 
+import { getCurrentUser } from "../Auth/AuthFuction";
+
 const DashboardContent = () => {
+
+  const currentUser = getCurrentUser();
+  console.log('currentUser is: ', currentUser);
   return (
    <div>
     {/* <TodaysCard></TodaysCard> */}
