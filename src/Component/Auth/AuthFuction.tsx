@@ -1,48 +1,68 @@
-// authService.js
 import axios from "axios";
 
-// Direct Base URL
 const API_BASE_URL = "https://appointment-manager-node.onrender.com/api/v1";
 
-// Save user and token to localStorage
-const saveUserToStorage = (data) => {
+// Save user & token
+const saveUserToStorage = (data: any) => {
   localStorage.setItem("user", JSON.stringify(data.user));
   localStorage.setItem("token", data.token);
 };
 
-// Remove user from localStorage
+// Remove user
 const removeUserFromStorage = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
 };
 
-// Get current logged-in user
+// Get current user
 export const getCurrentUser = () => {
   const user = localStorage.getItem("user");
   const token = localStorage.getItem("token");
   return user && token ? { user: JSON.parse(user), token } : null;
 };
 
-// Role-based registration (Patient or Doctor)
-export const registerUser = async ({ role, name, email, password, specialization, photo_url }) => {
+// REGISTER USER
+export const registerUser = async (data: {
+  name: string;
+  email: string;
+  password: string;
+  role: "PATIENT" | "DOCTOR";
+  specialization?: string;
+  photo_url?: string;
+}) => {
   try {
-    let endpoint = "";
-    const payload = { name, email, password };
-    if (photo_url) payload.photo_url = photo_url;
+    const { name, email, password, role, specialization, photo_url } = data;
 
-    if (role === "PATIENT") {
-      endpoint = "/auth/register/patient";
-    } else if (role === "DOCTOR") {
-      endpoint = "/auth/register/doctor";
-      if (!specialization) return { success: false, message: "Specialization is required for doctor" };
-      payload.specialization = specialization;
+    // Choose API based on role
+    const endpoint =
+      role === "PATIENT" ? "/auth/register/patient" : "/auth/register/doctor";
+
+    const response = await axios.post(`${API_BASE_URL}${endpoint}`, {
+      name,
+      email,
+      password,
+      ...(role === "DOCTOR" && { specialization }),
+      ...(photo_url && { photo_url }),
+    });
+
+    if (response.data.success) {
+      return { success: true, user: response.data.data };
     } else {
-      return { success: false, message: "Invalid role" };
+      return { success: false, message: response.data.message };
+    }
+  } catch (error: any) {
+    // FRONTEND CHECK: if already registered with another role
+    if (
+      error.response?.data?.message?.includes("already registered") &&
+      error.response?.data?.existingUser
+    ) {
+      const existingRole = error.response.data.existingUser.role;
+      return {
+        success: false,
+        message: `User already exists with role ${existingRole}, cannot register as ${data.role}`,
+      };
     }
 
-    const response = await axios.post(`${API_BASE_URL}${endpoint}`, payload);
-    return response.data;
-  } catch (error) {
     return {
       success: false,
       message: error.response?.data?.message || error.message,
@@ -50,18 +70,37 @@ export const registerUser = async ({ role, name, email, password, specialization
   }
 };
 
-// Login (Patient or Doctor)
-export const loginUser = async ({ email, password, role }) => {
+// LOGIN USER
+export const loginUser = async (data: {
+  email: string;
+  password: string;
+  role: "PATIENT" | "DOCTOR";
+}) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, { email, password, role });
-    if (response.data.success) saveUserToStorage(response.data.data);
-    return response.data;
-  } catch (error) {
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, data);
+
+    if (response.data.success) {
+      const userRole = response.data.data.user.role;
+
+      // FRONTEND VALIDATION: role match
+      if (userRole !== data.role) {
+        return {
+          success: false,
+          message: `Cannot login from this portal. Your role is ${userRole}`,
+        };
+      }
+
+      saveUserToStorage(response.data.data);
+      return { success: true, data: response.data.data };
+    } else {
+      return { success: false, message: response.data.message };
+    }
+  } catch (error: any) {
     return { success: false, message: error.response?.data?.message || error.message };
   }
 };
 
-// Logout
+// LOGOUT
 export const logoutUser = () => {
   removeUserFromStorage();
 };

@@ -142,7 +142,7 @@ const SignUp = () => {
               disabled={loading}
               className="w-full bg-slate-900 text-white py-2 rounded hover:bg-slate-800 disabled:opacity-50"
             >
-              {loading ? "Submitting..." : `Sign Up as ${role}`}
+              {loading ? "Registering..." : `Sign Up as ${role}`}
             </button>
 
             <p className="text-gray-600 text-sm text-center">

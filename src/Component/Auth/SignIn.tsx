@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { loginUser } from "./AuthFuction"; // API call function
 
 // Zod schema
 const loginSchema = z.object({
@@ -16,6 +17,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [role, setRole] = useState<"PATIENT" | "DOCTOR">("PATIENT");
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -25,12 +27,40 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log({ ...data, role }); // Input values + selected role
+  const onSubmit = async (data: LoginFormData) => {
+    setLoading(true);
+    try {
+      const response = await loginUser({ ...data, role }); // Send role along with email & password
+      console.log("Login response:", response);
+
+      if (response.success) {
+        const userRole = response.data.user.role;
+
+        // FRONTEND VALIDATION: Check role match
+        if (userRole !== role) {
+          alert(`You cannot login from this portal. Your role is ${userRole}`);
+          setLoading(false);
+          return;
+        }
+
+        // If role matches
+        alert(`Login successful! Welcome ${response.data.user.name}`);
+        // Optionally redirect to dashboard
+        // router.push(userRole === "DOCTOR" ? "/doctor-dashboard" : "/patient-dashboard");
+      } else {
+        alert("Login failed: " + response.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-slate-900 flex">
+
       {/* Right side - Login form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
@@ -40,24 +70,21 @@ const Login = () => {
           <div className="flex mb-6">
             <button
               type="button"
-              className={`flex-1 py-2 ${
-                role === "PATIENT" ? "bg-slate-900 text-white" : "bg-gray-200"
-              } rounded-l`}
+              className={`flex-1 py-2 ${role === "PATIENT" ? "bg-slate-900 text-white" : "bg-gray-200"} rounded-l`}
               onClick={() => setRole("PATIENT")}
             >
               Patient
             </button>
             <button
               type="button"
-              className={`flex-1 py-2 ${
-                role === "DOCTOR" ? "bg-slate-900 text-white" : "bg-gray-200"
-              } rounded-r`}
+              className={`flex-1 py-2 ${role === "DOCTOR" ? "bg-slate-900 text-white" : "bg-gray-200"} rounded-r`}
               onClick={() => setRole("DOCTOR")}
             >
               Doctor
             </button>
           </div>
 
+          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <label className="block mb-1 font-medium">Email</label>
@@ -81,9 +108,10 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-slate-900 text-white py-2 rounded hover:bg-slate-800"
+              disabled={loading}
+              className="w-full bg-slate-900 text-white py-2 rounded hover:bg-slate-800 disabled:opacity-50"
             >
-              Sign In as {role === "PATIENT" ? "Patient" : "Doctor"}
+              {loading ? "Logging in..." : `Sign In as ${role}`}
             </button>
 
             <p className="text-gray-600 text-sm text-center">
@@ -100,12 +128,11 @@ const Login = () => {
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('https://i.ibb.co/4RTKzV6C/images.png')",
-          }}
+          style={{ backgroundImage: "url('https://i.ibb.co/4RTKzV6C/images.png')" }}
         />
         <div className="absolute inset-0 bg-black/40" />
       </div>
+
     </div>
   );
 };
