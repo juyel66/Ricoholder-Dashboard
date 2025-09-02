@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { loginUser } from "./AuthFuction"; // API call function
+import { useNavigate } from "react-router-dom";
 
 // Zod schema
 const loginSchema = z.object({
@@ -26,25 +27,31 @@ const Login = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
+  const navigate = useNavigate();
+  
 
   const onSubmit = async (data: LoginFormData) => {
     setLoading(true);
     try {
       const response = await loginUser({ ...data, role }); // Send role along with email & password
       console.log("Login response:", response);
+      
 
       if (response.success) {
         const userRole = response.data.user.role;
+        navigate("/");
 
         // FRONTEND VALIDATION: Check role match
         if (userRole !== role) {
           alert(`You cannot login from this portal. Your role is ${userRole}`);
           setLoading(false);
+          // navigate("/");
           return;
         }
 
         // If role matches
-        alert(`Login successful! Welcome ${response.data.user.name}`);
+        // alert(`Login successful! Welcome ${response.data.user.name}`);
+        alert(`Login successful! Welcome to Doctor management website`);
         // Optionally redirect to dashboard
         // router.push(userRole === "DOCTOR" ? "/doctor-dashboard" : "/patient-dashboard");
       } else {
@@ -116,7 +123,7 @@ const Login = () => {
 
             <p className="text-gray-600 text-sm text-center">
               Don't have an account?{" "}
-              <a href="/signup" className="text-green-500">
+              <a href="/signup" className="text-slate-900 hover:underline">
                 Sign up
               </a>
             </p>

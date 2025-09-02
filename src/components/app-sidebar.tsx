@@ -1,4 +1,4 @@
-import { Home } from "lucide-react";      
+import { Home, BarChart2, CreditCard } from "lucide-react";      
 import {
   Sidebar,
   SidebarContent,
@@ -7,30 +7,36 @@ import {
   SidebarMenuItem,
 } from "./ui/sidebar";
 
-import { BarChart2, CreditCard } from "lucide-react";
-
 import CustomIcon from "@/Component/customIcons/customIcons";
-import { NavLink } from "react-router-dom"; // NavLink import
+import { NavLink } from "react-router-dom";
 
-const menu_items = [
+const doctor_routes = [
   {
-    title: "Dashboard",
-    url: "/",
-    icon: Home, 
+    title: "Doctor Dashboard",
+    url: "/doctor/dashboard",
+    icon: Home,
   },
   {
-    title: "Tables",
-    url: "/tables",
+    title: "Appointments",
+    url: "/doctor/appointments",
+    icon: BarChart2,
+  },
+];
+
+const patient_routes = [
+  {
+    title: "Patient Dashboard",
+    url: "/patient/dashboard",
+    icon: Home,
+  },
+  {
+    title: "Book Appointment",
+    url: "/patient/book-appointment",
     icon: BarChart2,
   },
   {
-    title: "Billing",
-    url: "/billing",
-    icon: CreditCard,
-  },
-  {
-    title: "RTL",
-    url: "/RTL",
+    title: "My Appointments",
+    url: "/patient/appointments",
     icon: CreditCard,
   },
 ];
@@ -53,19 +59,22 @@ const AppSidebar = () => {
     <Sidebar>
       <SidebarContent>
         <SidebarMenu>
+          {/* Doctor Routes */}
           <p className="mt-5 ml-10 text-white mb-5 px-2 text-[17px]">
-            VISION UI FREE
+            DOCTOR ROUTES
           </p>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent" />
-
-          {menu_items.map((item) => (
+          <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent mb-3" />
+          {doctor_routes.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton>
                 <NavLink
                   to={item.url}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 ${isActive ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"  : "text-white"}`
+                    `flex items-center gap-2 ${
+                      isActive
+                        ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"
+                        : "text-white"
+                    }`
                   }
                 >
                   <item.icon />
@@ -75,17 +84,52 @@ const AppSidebar = () => {
             </SidebarMenuItem>
           ))}
 
-          <p className="mt-5 text-white mb-5 px-2 text-[16px]">
-            ACCOUNT PAGES
-          </p>
+          {/* Divider */}
 
+          {/* <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" /> */}
+
+          {/* Patient Routes */}
+          <p className="mt-5 ml-10 text-white mb-5 px-2 text-[17px]">
+            PATIENT ROUTES
+          </p>
+          <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent mb-3" />
+          {patient_routes.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton>
+                <NavLink
+                  to={item.url}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 ${
+                      isActive
+                        ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"
+                        : "text-white"
+                    }`
+                  }
+                >
+                  <item.icon />
+                  <span>{item.title}</span>
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+
+          
+
+          {/* Account Pages */}
+     
+
+          <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
           {account_items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton>
                 <NavLink
                   to={item.url}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 ${isActive ? "text-white bg-[#1A1F37] rounded-xl w-full p-2" : "text-white"}`
+                    `flex items-center gap-2 ${
+                      isActive
+                        ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"
+                        : "text-white"
+                    }`
                   }
                 >
                   <item.icon />

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { registerUser } from "./AuthFuction";
+import { useNavigate } from "react-router-dom";
 
 // Zod schema
 const signupSchema = z.object({
@@ -29,15 +30,18 @@ const SignUp = () => {
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signupSchema),
   });
+  const navigate = useNavigate();
 
   const onSubmit = async (data: SignUpFormData) => {
     setLoading(true);
     try {
       const response = await registerUser({ ...data, role });
       console.log("User registered:", response);
+      navigate("/signin")
+
 
       if (response.success) {
-        alert("Registration successful!");
+        alert("Registration successful! Please sign in");
       } else {
         alert("Registration failed: " + response.message);
       }
@@ -146,7 +150,7 @@ const SignUp = () => {
             </button>
 
             <p className="text-gray-600 text-sm text-center">
-              Already have an account? <a href="/signin" className="text-green-500">Sign in</a>
+              Already have an account? <a href="/signin" className="text-slate-900 hover:underline">Sign in</a>
             </p>
           </form>
         </div>
