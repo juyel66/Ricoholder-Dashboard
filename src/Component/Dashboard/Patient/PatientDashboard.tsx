@@ -10,12 +10,13 @@ const PatientDashboard = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchDoctors = async (searchValue = search, specializationValue = specialization) => {
+  const fetchDoctors = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://appointment-manager-node.onrender.com/api/v1/doctors?page=${page}&limit=10&search=${searchValue}&specialization=${specializationValue}`
+        `https://appointment-manager-node.onrender.com/api/v1/doctors?page=${page}&limit=10&search=${search}&specialization=${specialization}`
       );
+
       setDoctors(response.data.data || []);
       setTotalPages(response.data.totalPages || 1);
       setLoading(false);
@@ -26,22 +27,21 @@ const PatientDashboard = () => {
     }
   };
 
-  // debounce
+  // page change বা search/specialization change হলে fetch
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      setPage(1); // reset page on search/filter change
-      fetchDoctors();
-    }, 500); // 500ms delay
+    fetchDoctors();
+  }, [page, search, specialization]);
 
-    return () => clearTimeout(delayDebounce); // cleanup
-  }, [search, specialization, page]);
-
+  // search change হলে page reset
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
+    setPage(1); // reset page
   };
 
+  // specialization change হলে page reset
   const handleSpecializationChange = (e) => {
     setSpecialization(e.target.value);
+    setPage(1); // reset page
   };
 
   if (loading) return <div>Loading doctors...</div>;
@@ -49,6 +49,7 @@ const PatientDashboard = () => {
 
   return (
     <div className="p-4">
+        <p>{doctors.length}</p>
       <h1 className="text-2xl font-bold mb-4">Patient Dashboard</h1>
 
       {/* Search & Filter */}
