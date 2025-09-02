@@ -2,9 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
 import DashboardPage from "./Component/Dashboard/DashboardPage";
-
 import DashboardContent from "./Component/Dashboard/DashboardContent";
 
 import SignUp from "./Component/Auth/SignUp";
@@ -16,64 +15,73 @@ import PatientDashboard from "./Component/Dashboard/Patient/PatientDashboard";
 import MyAppointments from "./Component/Dashboard/Patient/MyAppointments";
 import PatientProfile from "./Component/Dashboard/Patient/PatientProfile";
 
+import { getCurrentUser } from "./Component/Auth/AuthFuction";
+
+// Protected Route wrapper
+const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
+  const currentUser = getCurrentUser();
+
+  if (!currentUser) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  if (!allowedRoles.includes(currentUser.user.role)) {
+    // role mismatch
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};
+
+// Default redirect based on role
+const DefaultDashboardRedirect = () => {
+  const currentUser = getCurrentUser();
+  if (!currentUser) return <Navigate to="/signin" replace />;
+
+  if (currentUser.user.role === "DOCTOR") return <Navigate to="/appointment-list" replace />;
+  if (currentUser.user.role === "PATIENT") return <Navigate to="/patient-dashboard" replace />;
+
+  return <Navigate to="/signin" replace />;
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DashboardPage />,
     children: [
       {
-        index: true, // = /dashboard
-        element: <DashboardContent />,
+        index: true,
+        element: <DefaultDashboardRedirect />, // redirect user based on role
       },
-  
-  
-        {
-        path: "appointment-list", // = /dashboard/signin
-        element: <AppointmentList />,
+
+      // Doctor routes
+      {
+        element: <ProtectedRoute allowedRoles={["DOCTOR"]} />,
+        children: [
+          { path: "appointment-list", element: <AppointmentList /> },
+          { path: "appointment-management", element: <Appointments /> },
+        ],
       },
-        {
-        path: "appointment-management", // = /dashboard/signin
-        element: <Appointments />,
+
+      // Patient routes
+      {
+        element: <ProtectedRoute allowedRoles={["PATIENT"]} />,
+        children: [
+          { path: "patient-dashboard", element: <PatientDashboard /> },
+          { path: "my-appointments", element: <MyAppointments /> },
+          { path: "patient-profile", element: <PatientProfile /> },
+        ],
       },
-        {
-        path: "patient-dashboard", 
-        element: <PatientDashboard />,
-      },
-        {
-        path: "my-appointments", 
-        element: <MyAppointments />,
-      },
-        {
-        path: "patient-profile", 
-        element: <PatientProfile />,
-      },
-      // {
-      //   path: "signup", // = /dashboard/signup
-      //   element: <SignUp />,
-      // },
-      // {
-      //   path: "signin", // = /dashboard/signin
-      //   element: <SignIn />,
-      // },
     ],
   },
-        {
-        path: "signup", // = /dashboard/signup
-        element: <SignUp />,
-      },
-      {
-        path: "signin", // = /dashboard/signin
-        element: <SignIn />,
-      },
-    
+
+  // Public auth routes
+  { path: "signup", element: <SignUp /> },
+  { path: "signin", element: <SignIn /> },
 ]);
-
-
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="">
-      <RouterProvider router={router} />
-    </div>
+    <RouterProvider router={router} />
   </StrictMode>
 );
