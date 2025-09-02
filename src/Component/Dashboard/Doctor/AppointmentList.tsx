@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { getCurrentUser } from "@/Component/Auth/AuthFuction";
 
 interface Appointment {
   _id: string;
@@ -10,59 +12,79 @@ interface Appointment {
     photo_url?: string;
   };
   date: string;
-  status: "PENDING" | "COMPLETED" | "CANCELLED";
+  status: string;
   reason?: string;
 }
 
-// Dummy data
-const dummyAppointments: Appointment[] = [
-  {
-    _id: "1",
-    patient: { name: "John Doe", email: "john@example.com", photo_url: "/default-patient.png" },
-    date: "2025-09-05",
-    status: "PENDING",
-    reason: "Regular checkup",
-  },
-  {
-    _id: "2",
-    patient: { name: "Jane Smith", email: "jane@example.com" },
-    date: "2025-09-06",
-    status: "COMPLETED",
-  },
-  {
-    _id: "3",
-    patient: { name: "Alice Johnson", email: "alice@example.com" },
-    date: "2025-09-07",
-    status: "CANCELLED",
-    reason: "Feeling better",
-  },
-  {
-    _id: "4",
-    patient: { name: "Bob Brown", email: "bob@example.com" },
-    date: "2025-09-08",
-    status: "PENDING",
-  },
-  {
-    _id: "5",
-    patient: { name: "Charlie Davis" },
-    date: "2025-09-09",
-    status: "COMPLETED",
-    reason: "Follow-up visit",
-  },
-];
-
 const DoctorDashboard = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>(dummyAppointments);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [page, setPage] = useState(1);
-  const [totalPages] = useState(2); // Dummy pagination
+  const [totalPages, setTotalPages] = useState(1);
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
-  const filteredAppointments = appointments.filter((appt) => {
-    const statusMatch = statusFilter ? appt.status === statusFilter : true;
-    const dateMatch = dateFilter ? appt.date === dateFilter : true;
-    return statusMatch && dateMatch;
-  });
+  const fetchAppointments = async () => {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      setError("⚠️ User not logged in");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await axios.get(
+        `https://appointment-manager-node.onrender.com/api/v1/appointments/doctor?page=${page}${
+          statusFilter ? `&status=${statusFilter}` : ""
+        }${dateFilter ? `&date=${dateFilter}` : ""}`,
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+
+      console.log("API Response:", res.data); // ✅ API Response Console log
+
+      setAppointments(res.data.data || []);
+      setTotalPages(res.data.totalPages || 1);
+      setLoading(false);
+    } catch (err: any) {
+      console.error("API Error:", err.response?.data);
+
+      // Dummy data fallback
+      const dummyData: Appointment[] = [
+        {
+          _id: "1",
+          patient: { name: "John Doe", email: "john@example.com" },
+          date: new Date().toISOString(),
+          status: "PENDING",
+          reason: "Regular Checkup",
+        },
+        {
+          _id: "2",
+          patient: { name: "Jane Smith", email: "jane@example.com" },
+          date: new Date().toISOString(),
+          status: "COMPLETED",
+          reason: "Dental Cleaning",
+        },
+      ];
+
+      console.log("Using Dummy Data:", dummyData); // ✅ Dummy data console log
+      setAppointments(dummyData);
+      setError(err.response?.data?.message || "Failed to fetch appointments. Showing dummy data.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointments();
+  }, [page, statusFilter, dateFilter]);
+
+  if (loading) return <div>Loading appointments...</div>;
+  if (error) console.warn(error); // Warning in console
 
   return (
     <div className="p-4">
@@ -89,12 +111,12 @@ const DoctorDashboard = () => {
         />
       </div>
 
-      {/* Appointment List */}
-      {filteredAppointments.length === 0 ? (
-        <p className="text-center mt-20 mb-20">No appointments found.</p>
+      {/* Appointments List */}
+      {appointments.length === 0 ? (
+        <p className="text-center mt-20 mb-20">No appointments available.</p>
       ) : (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredAppointments.map((appt) => (
+          {appointments.map((appt) => (
             <li key={appt._id} className="border p-4 rounded shadow hover:shadow-lg transition">
               <div className="flex items-center gap-4 mb-2">
                 <img
@@ -119,7 +141,9 @@ const DoctorDashboard = () => {
       <div className="flex justify-center mt-6 gap-2">
         <button
           onClick={() => setPage(Math.max(page - 1, 1))}
-          disabled={page === 1}
+          disabled={page ===1}
+
+          
           className="px-3 py-1 border rounded disabled:opacity-50"
         >
           Prev
