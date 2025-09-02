@@ -12,13 +12,13 @@ import { NavLink } from "react-router-dom";
 
 const doctor_routes = [
   {
-    title: "Doctor Dashboard",
-    url: "/Dashboard",
+    title: "Appointments List",
+    url: "/appointment-list",
     icon: Home,
   },
   {
-    title: "Appointments",
-    url: "appointments",
+    title: "Appointment Manage",
+    url: "appointment-management",
     icon: BarChart2,
   },
 ];
