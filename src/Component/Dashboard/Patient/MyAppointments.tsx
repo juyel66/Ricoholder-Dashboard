@@ -61,16 +61,14 @@ const MyAppointments = () => {
         >
           <option value="">All Status</option>
           <option value="PENDING">Pending</option>
-          <option value="COMPLETE">Complete</option>
+          <option value="COMPLETED">Complete</option>
           <option value="CANCELLED">Cancelled</option>
         </select>
-
-        
       </div>
 
       {/* Appointments List */}
       {appointments.length === 0 ? (
-        <p>No appointments found.</p>
+        <p className="text-center flex items-center justify-center mb-20 mt-20">No appointments found.</p>
       ) : (
         <ul className="space-y-4">
           {appointments.map((appt) => (
