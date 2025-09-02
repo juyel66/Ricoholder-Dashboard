@@ -11,6 +11,8 @@ import SignUp from "./Component/Auth/SignUp";
 import SignIn from "./Component/Auth/SignIn";
 
 import DoctorDashboard from "./Component/Dashboard/Doctor/DoctorDashboard";
+import Appointments from "./Component/Dashboard/Doctor/Appointments";
+import PatientDashboard from "./Component/Dashboard/Patient/PatientDashboard";
 
 const router = createBrowserRouter([
   {
@@ -24,12 +26,16 @@ const router = createBrowserRouter([
   
   
         {
-        path: "DoctorDashboard", // = /dashboard/signin
+        path: "Dashboard", // = /dashboard/signin
         element: <DoctorDashboard />,
       },
         {
-        path: "DoctorDashboard", // = /dashboard/signin
-        element: <DoctorDashboard />,
+        path: "appointMents", // = /dashboard/signin
+        element: <Appointments />,
+      },
+        {
+        path: "patient-dashboard", // = /dashboard/signin
+        element: <PatientDashboard />,
       },
       // {
       //   path: "signup", // = /dashboard/signup

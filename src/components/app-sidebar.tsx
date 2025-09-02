@@ -13,12 +13,12 @@ import { NavLink } from "react-router-dom";
 const doctor_routes = [
   {
     title: "Doctor Dashboard",
-    url: "/DoctorDashboard",
+    url: "/Dashboard",
     icon: Home,
   },
   {
     title: "Appointments",
-    url: "/doctor/appointments",
+    url: "appointments",
     icon: BarChart2,
   },
 ];
@@ -26,7 +26,7 @@ const doctor_routes = [
 const patient_routes = [
   {
     title: "Patient Dashboard",
-    url: "/patient/dashboard",
+    url: "/patient-dashboard",
     icon: Home,
   },
   {
@@ -114,7 +114,7 @@ const AppSidebar = () => {
 
           {/* Account Pages */}
           <p className="mt-5 ml-10 text-white mb-5 px-2 text-[16px]">
-            ACCOUNT PAGES
+            MANAGE ACCOUNT
           </p>
           {account_items.map((item) => (
             <SidebarMenuItem key={item.title}>
