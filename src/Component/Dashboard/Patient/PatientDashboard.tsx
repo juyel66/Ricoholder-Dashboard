@@ -10,13 +10,12 @@ const PatientDashboard = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchDoctors = async () => {
+  const fetchDoctors = async (searchValue = search, specializationValue = specialization) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://appointment-manager-node.onrender.com/api/v1/doctors?page=${page}&limit=10&search=${search}&specialization=${specialization}`
+        `https://appointment-manager-node.onrender.com/api/v1/doctors?page=${page}&limit=10&search=${searchValue}&specialization=${specializationValue}`
       );
-
       setDoctors(response.data.data || []);
       setTotalPages(response.data.totalPages || 1);
       setLoading(false);
@@ -27,9 +26,23 @@ const PatientDashboard = () => {
     }
   };
 
+  // debounce
   useEffect(() => {
-    fetchDoctors();
-  }, [page, search, specialization]);
+    const delayDebounce = setTimeout(() => {
+      setPage(1); // reset page on search/filter change
+      fetchDoctors();
+    }, 500); // 500ms delay
+
+    return () => clearTimeout(delayDebounce); // cleanup
+  }, [search, specialization, page]);
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSpecializationChange = (e) => {
+    setSpecialization(e.target.value);
+  };
 
   if (loading) return <div>Loading doctors...</div>;
   if (error) return <div>{error}</div>;
@@ -44,20 +57,19 @@ const PatientDashboard = () => {
           type="text"
           placeholder="Search doctors..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           className="border px-3 py-2 rounded flex-1"
         />
 
         <select
           value={specialization}
-          onChange={(e) => setSpecialization(e.target.value)}
+          onChange={handleSpecializationChange}
           className="border px-3 py-2 rounded"
         >
           <option value="">All Specializations</option>
           <option value="Cardiologist">Cardiologist</option>
           <option value="Dentist">Dentist</option>
           <option value="Neurologist">Neurologist</option>
-          {/* অন্য specialization গুলো API থেকে dynamically load করা যাবে */}
         </select>
       </div>
 
