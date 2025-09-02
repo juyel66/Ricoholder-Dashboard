@@ -13,6 +13,7 @@ import SignIn from "./Component/Auth/SignIn";
 import DoctorDashboard from "./Component/Dashboard/Doctor/DoctorDashboard";
 import Appointments from "./Component/Dashboard/Doctor/Appointments";
 import PatientDashboard from "./Component/Dashboard/Patient/PatientDashboard";
+import MyAppointments from "./Component/Dashboard/Patient/MyAppointments";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,12 @@ const router = createBrowserRouter([
         element: <Appointments />,
       },
         {
-        path: "patient-dashboard", // = /dashboard/signin
+        path: "patient-dashboard", 
         element: <PatientDashboard />,
+      },
+        {
+        path: "my-appointments", 
+        element: <MyAppointments />,
       },
       // {
       //   path: "signup", // = /dashboard/signup

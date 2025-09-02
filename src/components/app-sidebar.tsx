@@ -36,7 +36,7 @@ const patient_routes = [
   },
   {
     title: "My Appointments",
-    url: "/patient/appointments",
+    url: "my-appointments",
     icon: CreditCard,
   },
 ];
