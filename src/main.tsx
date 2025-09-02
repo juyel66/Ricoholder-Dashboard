@@ -10,7 +10,7 @@ import DashboardContent from "./Component/Dashboard/DashboardContent";
 import SignUp from "./Component/Auth/SignUp";
 import SignIn from "./Component/Auth/SignIn";
 
-import DoctorDashboard from "./Component/Dashboard/Doctor/DoctorDashboard";
+import AppointmentList from "./Component/Dashboard/Doctor/AppointmentList";
 import Appointments from "./Component/Dashboard/Doctor/Appointments";
 import PatientDashboard from "./Component/Dashboard/Patient/PatientDashboard";
 import MyAppointments from "./Component/Dashboard/Patient/MyAppointments";
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
   
   
         {
-        path: "Dashboard", // = /dashboard/signin
-        element: <DoctorDashboard />,
+        path: "appointment-list", // = /dashboard/signin
+        element: <AppointmentList />,
       },
         {
-        path: "appointMents", // = /dashboard/signin
+        path: "appointment-management", // = /dashboard/signin
         element: <Appointments />,
       },
         {
