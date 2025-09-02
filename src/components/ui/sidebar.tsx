@@ -207,7 +207,7 @@ function Sidebar({
             <div className="flex-1 overflow-auto">{children}</div>
 
             {/* Documentation section at the bottom */}
-            <div
+            {/* <div
               className="mt-auto h-48 w-full rounded-xl bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: "url('/images/documentation.png')",
@@ -225,7 +225,7 @@ function Sidebar({
                   DOCUMENTATION
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </SheetContent>
       </Sheet>
@@ -281,7 +281,7 @@ function Sidebar({
           <div className="flex-1 overflow-auto">{children}</div>
 
           {/* Documentation section at the bottom */}
-          <div
+          {/* <div
             className="mt-auto h-48 w-full rounded-xl bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: "url('/images/documentation.png')",
@@ -299,7 +299,7 @@ function Sidebar({
                 DOCUMENTATION
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

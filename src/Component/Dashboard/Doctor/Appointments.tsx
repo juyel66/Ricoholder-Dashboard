@@ -12,7 +12,7 @@ interface Appointment {
     photo_url?: string;
   };
   date: string;
-  status: "PENDING" | "COMPLETED" | "CANCELLED";
+  status: "PENDING" | "COMPLETE" | "CANCELLED"; // ✅ FIXED
   reason?: string;
 }
 
@@ -25,6 +25,7 @@ const DoctorDashboard = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
+  // Fetch appointments
   const fetchAppointments = async () => {
     const currentUser = getCurrentUser();
     if (!currentUser) {
@@ -46,34 +47,13 @@ const DoctorDashboard = () => {
         }
       );
 
-      console.log("API Response:", res.data); // ✅ Console log
-
+      console.log("API Response:", res.data);
       setAppointments(res.data.data || []);
       setTotalPages(res.data.totalPages || 1);
       setLoading(false);
     } catch (err: any) {
       console.error("API Error:", err.response?.data);
-
-      // Dummy data fallback
-      const dummyData: Appointment[] = [
-        {
-          _id: "1",
-          patient: { name: "John Doe", email: "john@example.com" },
-          date: new Date().toISOString(),
-          status: "PENDING",
-          reason: "Regular Checkup",
-        },
-        {
-          _id: "2",
-          patient: { name: "Jane Smith", email: "jane@example.com" },
-          date: new Date().toISOString(),
-          status: "COMPLETED",
-          reason: "Dental Cleaning",
-        },
-      ];
-      setAppointments(dummyData);
-
-      setError(err.response?.data?.message || "Failed to fetch appointments. Showing dummy data.");
+      setError(err.response?.data?.message || "Failed to fetch appointments");
       setLoading(false);
     }
   };
@@ -82,35 +62,47 @@ const DoctorDashboard = () => {
     fetchAppointments();
   }, [page, statusFilter, dateFilter]);
 
-  const updateStatus = async (appointmentId: string, status: "COMPLETED" | "CANCELLED") => {
-    const confirmMsg = `Are you sure you want to mark this appointment as ${status}?`;
-    if (!confirm(confirmMsg)) return;
+  // ✅ Update appointment status
+  const updateStatus = async (
+    appointmentId: string,
+    status: "COMPLETE" | "CANCELLED"
+  ) => {
+    if (!confirm(`Are you sure you want to mark this as ${status}?`)) return;
 
     const currentUser = getCurrentUser();
     if (!currentUser) return;
 
     try {
-      await axios.patch(
+      const res = await axios.patch(
         "https://appointment-manager-node.onrender.com/api/v1/appointments/update-status",
-        { appointment_id: appointmentId, status },
+        {
+          appointment_id: appointmentId, // ✅ key name correct
+          status: status, // ✅ must be "COMPLETE" or "CANCELLED"
+        },
         {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
+            "Content-Type": "application/json",
           },
         }
       );
 
+      console.log("Status Updated:", res.data);
+
+      // Update UI instantly
       setAppointments((prev) =>
-        prev.map((appt) => (appt._id === appointmentId ? { ...appt, status } : appt))
+        prev.map((appt) =>
+          appt._id === appointmentId ? { ...appt, status } : appt
+        )
       );
     } catch (err: any) {
-      console.error(err);
+      console.error("Update Error:", err.response?.data);
       alert(err.response?.data?.message || "Failed to update status");
     }
   };
 
   if (loading) return <div>Loading appointments...</div>;
-  if (error) console.warn(error); // Warning in console, but still show dummy data
+  if (error) console.warn(error);
 
   return (
     <div className="p-4">
@@ -125,7 +117,7 @@ const DoctorDashboard = () => {
         >
           <option value="">All Status</option>
           <option value="PENDING">Pending</option>
-          <option value="COMPLETED">Completed</option>
+          <option value="COMPLETE">Completed</option>
           <option value="CANCELLED">Cancelled</option>
         </select>
 
@@ -177,7 +169,7 @@ const DoctorDashboard = () => {
               {appt.status === "PENDING" && (
                 <div className="flex gap-2 mt-2">
                   <button
-                    onClick={() => updateStatus(appt._id, "COMPLETED")}
+                    onClick={() => updateStatus(appt._id, "COMPLETE")}
                     className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
                   >
                     Mark Complete
