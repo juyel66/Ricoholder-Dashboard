@@ -29,14 +29,21 @@ const patient_routes = [
     url: "/patient-dashboard",
     icon: Home,
   },
-  {
-    title: "Book Appointment",
-    url: "/patient/book-appointment",
-    icon: BarChart2,
-  },
+
+  // {
+  //   title: "Book Appointment",
+  //   url: "/patient/book-appointment",
+  //   icon: BarChart2,
+  // },
+
   {
     title: "My Appointments",
     url: "my-appointments",
+    icon: CreditCard,
+  },
+  {
+    title: "Patient Profile",
+    url: "patient-profile",
     icon: CreditCard,
   },
 ];

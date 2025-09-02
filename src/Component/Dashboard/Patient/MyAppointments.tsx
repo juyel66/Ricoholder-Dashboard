@@ -10,7 +10,7 @@ const MyAppointments = () => {
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [statusFilter, setStatusFilter] = useState(""); // optional status filter
+  const [statusFilter, setStatusFilter] = useState("");
 
   const fetchAppointments = async () => {
     const currentUser = getCurrentUser();
@@ -23,14 +23,13 @@ const MyAppointments = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://appointment-manager-node.onrender.com/api/v1/appointments/patient?page=${page}${statusFilter ? `&status=${statusFilter}` : ""}`,
+        `https://appointment-manager-node.onrender.com/api/v1/appointments/patient?page=${page}${
+          statusFilter ? `&status=${statusFilter}` : ""
+        }`,
         {
-          headers: {
-            Authorization: `Bearer ${currentUser.token}`,
-          },
+          headers: { Authorization: `Bearer ${currentUser.token}` },
         }
       );
-
       setAppointments(res.data.data || []);
       setTotalPages(res.data.totalPages || 1);
       setLoading(false);
@@ -45,19 +44,18 @@ const MyAppointments = () => {
     fetchAppointments();
   }, [page, statusFilter]);
 
-  if (loading) return <div>Loading your appointments...</div>;
-  if (error) return <div>{error}</div>;
-
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">My Appointments</h1>
+    <div className="p-4 md:p-8">
+      <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
+        My Appointments
+      </h1>
 
       {/* Status Filter */}
-      <div className="mb-4">
+      <div className="mb-6 flex justify-center md:justify-start">
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border px-3 py-2 rounded"
+          className="border border-gray-300 px-4 py-2 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Status</option>
           <option value="PENDING">Pending</option>
@@ -67,23 +65,53 @@ const MyAppointments = () => {
       </div>
 
       {/* Appointments List */}
-      {appointments.length === 0 ? (
-        <p className="text-center flex items-center justify-center mb-20 mt-20">No appointments found.</p>
+      {loading ? (
+        <p className="text-center text-gray-500 mt-20">
+          Loading your appointments...
+        </p>
+      ) : appointments.length === 0 ? (
+        <p className="text-center text-gray-500 mt-20 mb-20">
+          No appointments available.
+        </p>
       ) : (
-        <ul className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {appointments.map((appt) => (
-            <li key={appt._id} className="border p-4 rounded shadow">
-              <p><strong>Doctor:</strong> {appt.doctor?.name || "N/A"}</p>
-              <p><strong>Date:</strong> {new Date(appt.date).toLocaleDateString()}</p>
-              <p><strong>Status:</strong> {appt.status}</p>
-              {appt.reason && <p><strong>Reason:</strong> {appt.reason}</p>}
-            </li>
+            <div
+              key={appt._id}
+              className="border rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col justify-between"
+            >
+              <div>
+                <h2 className="font-semibold text-lg mb-2">
+                  Doctor: {appt.doctor?.name || "N/A"}
+                </h2>
+                <p className="text-gray-600 mb-1">
+                  Date: {new Date(appt.date).toLocaleDateString()}
+                </p>
+                <p className="text-gray-600 mb-1">
+                  Status:{" "}
+                  <span
+                    className={`font-semibold ${
+                      appt.status === "COMPLETED"
+                        ? "text-green-600"
+                        : appt.status === "PENDING"
+                        ? "text-yellow-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {appt.status}
+                  </span>
+                </p>
+                {appt.reason && (
+                  <p className="text-gray-600">Reason: {appt.reason}</p>
+                )}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
       {/* Pagination */}
-      <div className="flex justify-center mt-4 gap-2">
+      <div className="flex justify-center mt-6 gap-2">
         <button
           onClick={() => setPage(Math.max(page - 1, 1))}
           disabled={page === 1}
