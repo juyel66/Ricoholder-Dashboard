@@ -31,6 +31,9 @@ const SignUp = () => {
     resolver: zodResolver(signupSchema),
   });
   const navigate = useNavigate();
+  
+
+
 
   const onSubmit = async (data: SignUpFormData) => {
     setLoading(true);

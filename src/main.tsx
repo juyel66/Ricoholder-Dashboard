@@ -4,12 +4,13 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DashboardPage from "./Component/Dashboard/DashboardPage";
-import Tables from "./Component/Tables/TablesAuthor";
+
 import DashboardContent from "./Component/Dashboard/DashboardContent";
-import Billing from "./Component/Billing/Billing";
+
 import SignUp from "./Component/Auth/SignUp";
 import SignIn from "./Component/Auth/SignIn";
-import TablesContent from "./Component/Tables/TablesContent";
+
+import DoctorDashboard from "./Component/Dashboard/Doctor/DoctorDashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +21,15 @@ const router = createBrowserRouter([
         index: true, // = /dashboard
         element: <DashboardContent />,
       },
-      {
-        path: "tables", // = /dashboard/tables
-        element: <TablesContent />,
+  
+  
+        {
+        path: "DoctorDashboard", // = /dashboard/signin
+        element: <DoctorDashboard />,
       },
-      {
-        path: "billing", // = /dashboard/billing
-        element: <Billing />,
+        {
+        path: "DoctorDashboard", // = /dashboard/signin
+        element: <DoctorDashboard />,
       },
       // {
       //   path: "signup", // = /dashboard/signup
@@ -46,6 +49,7 @@ const router = createBrowserRouter([
         path: "signin", // = /dashboard/signin
         element: <SignIn />,
       },
+    
 ]);
 
 

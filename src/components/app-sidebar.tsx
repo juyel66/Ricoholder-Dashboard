@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 const doctor_routes = [
   {
     title: "Doctor Dashboard",
-    url: "/doctor/dashboard",
+    url: "/DoctorDashboard",
     icon: Home,
   },
   {
@@ -85,8 +85,7 @@ const AppSidebar = () => {
           ))}
 
           {/* Divider */}
-
-          {/* <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" /> */}
+          <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
 
           {/* Patient Routes */}
           <p className="mt-5 ml-10 text-white mb-5 px-2 text-[17px]">
@@ -113,12 +112,10 @@ const AppSidebar = () => {
             </SidebarMenuItem>
           ))}
 
-          
-
           {/* Account Pages */}
-     
-
-          <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+          <p className="mt-5 ml-10 text-white mb-5 px-2 text-[16px]">
+            ACCOUNT PAGES
+          </p>
           {account_items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton>
