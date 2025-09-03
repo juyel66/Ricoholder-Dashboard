@@ -71,9 +71,9 @@ const PatientDashboard = () => {
     try {
       setBooking(true);
 
-      // Backend এর expected key check করে payload বানানো
+     
       const payload = {
-        doctorId: selectedDoctor._id || selectedDoctor.id, //  fallback
+        doctorId: selectedDoctor._id || selectedDoctor.id, 
         date,
       };
 

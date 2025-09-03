@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { loginUser } from "./AuthFuction"; // API call function
+import { loginUser } from "./AuthFuction"; 
 import { useNavigate } from "react-router-dom";
 
 // Zod schema
@@ -33,7 +33,7 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     setLoading(true);
     try {
-      const response = await loginUser({ ...data, role }); // Send role along with email & password
+      const response = await loginUser({ ...data, role });
       console.log("Login response:", response);
       
 

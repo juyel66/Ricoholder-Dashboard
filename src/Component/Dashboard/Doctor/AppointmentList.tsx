@@ -46,7 +46,7 @@ const DoctorDashboard = () => {
         }
       );
 
-      console.log("API Response:", res.data); // ✅ API Response Console log
+      console.log("API Response:", res.data); // 
 
       setAppointments(res.data.data || []);
       setTotalPages(res.data.totalPages || 1);
@@ -72,7 +72,7 @@ const DoctorDashboard = () => {
         },
       ];
 
-      console.log("Using Dummy Data:", dummyData); // ✅ Dummy data console log
+      console.log("Using Dummy Data:", dummyData); // 
       setAppointments(dummyData);
       setError(err.response?.data?.message || "Failed to fetch appointments. Showing dummy data.");
       setLoading(false);

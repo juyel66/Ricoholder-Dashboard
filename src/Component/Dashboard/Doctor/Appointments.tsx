@@ -72,7 +72,7 @@ const DoctorDashboard = () => {
       console.log("Updating Status:", { appointment_id: _id, status });
       const res = await axios.patch(
         `${API_BASE_URL}/appointments/update-status`,
-        { appointment_id: _id, status }, // ✅ Correct key and value
+        { appointment_id: _id, status }, // 
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
