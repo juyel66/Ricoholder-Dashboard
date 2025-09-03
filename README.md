@@ -1,6 +1,6 @@
 # Doctor Management
 
-A modern, responsive **Doctor Appointment Management System** built with **Next.js, React, Tailwind CSS, and Axios**.  
+A modern, responsive **Doctor Appointment Management System** built with **React, Typescript, Context API, Tailwind CSS, and Axios**.  
 This application allows patients to browse doctors, book appointments, and manage their schedules, while doctors can manage their appointments efficiently.
 
 ---
@@ -10,19 +10,14 @@ This application allows patients to browse doctors, book appointments, and manag
 
 ---
 
-## Repository
-[GitHub Repository](https://github.com/your-username/doctor-management)
-
----
 
 ## Tech Stack
-- Framework: Next.js (React)
-- Language: TypeScript (optional but supported)
+- Framework: React
+- State Management: Context API
 - Styling: Tailwind CSS
 - API Requests: Axios
-- Form Handling: React Hook Form + Zod
-- State Management: Zustand / Redux Toolkit (optional)
-- API Caching: React Query (optional)
+- Form Handling: React Hook Form + Zod (optional)
+- Extra Options: Zustand / Redux Toolkit (not used), React Query (not used)
 
 ---
 
@@ -45,7 +40,7 @@ This application allows patients to browse doctors, book appointments, and manag
 - Update appointment status: Completed / Cancelled
 
 ### UI/UX
-- Modern responsive design
+- Responsive design
 - Mobile-first approach
 - Loading & error states
 - Notifications (success & error handling)
