@@ -8,7 +8,7 @@ const DashboardPage = () => {
   return (
     <SidebarProvider>
       <div
-        className="flex w-screen min-h-screen bg-no-repeat bg-cover bg-fixed"
+        className="flex  w-screen min-h-screen bg-no-repeat bg-cover bg-fixed"
         style={{
           backgroundImage: "url('/images/bgImage.png')",
           backgroundPosition: "top center",

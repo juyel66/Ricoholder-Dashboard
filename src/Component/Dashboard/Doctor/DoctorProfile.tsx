@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/Component/Auth/AuthFuction";
 
-const PatientProfile = () => {
+const DoctorProfile = () => {
   const currentUser = getCurrentUser();
 
   if (!currentUser) {
@@ -13,11 +13,12 @@ const PatientProfile = () => {
     );
   }
 
-  const { name, email, photo_url } = currentUser.user;
+  const { name, email, photo_url, specialization, phone, address } = currentUser.user;
 
   return (
-    <div className="p-5 max-w-3xl mx-auto border-2 shadow-md rounded-lg">
-      <div className="flex flex-col items-center mb-8">
+    <div className="p-5 max-w-3xl mx-auto border-2  shadow-md rounded-lg">
+      {/* Profile Photo & Name */}
+      <div className="flex flex-col text-white items-center mb-8">
         {photo_url ? (
           <img
             src={photo_url}
@@ -31,8 +32,12 @@ const PatientProfile = () => {
         )}
         <h1 className="text-3xl font-bold">{name}</h1>
         <p className="text-white mt-1">{email}</p>
+        {specialization && (
+          <p className="text-gray-500 mt-1 italic">{specialization}</p>
+        )}
       </div>
 
+      {/* Doctor Info */}
       <div className="space-y-4">
         <div className="flex justify-between border-b pb-2">
           <span className="font-medium text-white">Name:</span>
@@ -43,14 +48,24 @@ const PatientProfile = () => {
           <span className="text-white">{email}</span>
         </div>
         <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-white">Specialization:</span>
+          <span className="text-white">{specialization || "Not Provided"}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-white">Phone:</span>
+          <span className="text-white">{phone || "Not Provided"}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-white">Address:</span>
+          <span className="text-white">{address || "Not Provided"}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
           <span className="font-medium text-white">Photo URL:</span>
-          <span className="text-white">
-            {photo_url ? photo_url : "Not Provided"}
-          </span>
+          <span className="text-white">{photo_url || "Not Provided"}</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default PatientProfile;
+export default DoctorProfile;

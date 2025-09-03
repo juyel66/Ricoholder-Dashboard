@@ -12,7 +12,7 @@ interface Appointment {
     photo_url?: string;
   };
   date: string;
-  status: "PENDING" | "COMPLETE" | "CANCELLED"; // ✅ FIXED
+  status: "PENDING" | "COMPLETE" | "CANCELLED";
   reason?: string;
 }
 
@@ -25,10 +25,14 @@ const DoctorDashboard = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
+  const API_BASE_URL = "https://appointment-manager-node.onrender.com/api/v1";
+
+  const currentUser = getCurrentUser();
+  const token = currentUser?.token;
+
   // Fetch appointments
   const fetchAppointments = async () => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
+    if (!token) {
       setError("⚠️ User not logged in");
       setLoading(false);
       return;
@@ -37,22 +41,19 @@ const DoctorDashboard = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://appointment-manager-node.onrender.com/api/v1/appointments/doctor?page=${page}${
+        `${API_BASE_URL}/appointments/doctor?page=${page}${
           statusFilter ? `&status=${statusFilter}` : ""
         }${dateFilter ? `&date=${dateFilter}` : ""}`,
         {
-          headers: {
-            Authorization: `Bearer ${currentUser.token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      console.log("API Response:", res.data);
+      console.log("Fetched Appointments:", res.data);
       setAppointments(res.data.data || []);
       setTotalPages(res.data.totalPages || 1);
       setLoading(false);
     } catch (err: any) {
-      console.error("API Error:", err.response?.data);
+      console.error("Fetch Error:", err.response?.data || err.message);
       setError(err.response?.data?.message || "Failed to fetch appointments");
       setLoading(false);
     }
@@ -62,54 +63,40 @@ const DoctorDashboard = () => {
     fetchAppointments();
   }, [page, statusFilter, dateFilter]);
 
-  // ✅ Update appointment status
-  const updateStatus = async (
-    appointmentId: string,
-    status: "COMPLETE" | "CANCELLED"
-  ) => {
+  // Update appointment status
+  const updateStatus = async (_id: string, status: "COMPLETE" | "CANCELLED") => {
+    if (!token) return;
     if (!confirm(`Are you sure you want to mark this as ${status}?`)) return;
 
-    const currentUser = getCurrentUser();
-    if (!currentUser) return;
-
     try {
+      console.log("Updating Status:", { appointment_id: _id, status });
       const res = await axios.patch(
-        "https://appointment-manager-node.onrender.com/api/v1/appointments/update-status",
-        {
-          appointment_id: appointmentId, // ✅ key name correct
-          status: status, // ✅ must be "COMPLETE" or "CANCELLED"
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${currentUser.token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        `${API_BASE_URL}/appointments/update-status`,
+        { appointment_id: _id, status }, // ✅ Correct key and value
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      console.log("Status Updated:", res.data);
+      console.log("Update Response:", res.data);
 
       // Update UI instantly
       setAppointments((prev) =>
-        prev.map((appt) =>
-          appt._id === appointmentId ? { ...appt, status } : appt
-        )
+        prev.map((appt) => (appt._id === _id ? { ...appt, status } : appt))
       );
     } catch (err: any) {
-      console.error("Update Error:", err.response?.data);
+      console.error("Update Error:", err.response?.data || err.message);
       alert(err.response?.data?.message || "Failed to update status");
     }
   };
 
-  if (loading) return <div>Loading appointments...</div>;
-  if (error) console.warn(error);
+  if (loading) return <div className="p-5 text-center">Loading appointments...</div>;
+  if (error) return <div className="p-5 text-center text-red-500">{error}</div>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Doctor Dashboard</h1>
+    <div className="p-5 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-5">Doctor Dashboard</h1>
 
       {/* Filters */}
-      <div className="flex gap-4 mb-4 flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
@@ -117,7 +104,7 @@ const DoctorDashboard = () => {
         >
           <option value="">All Status</option>
           <option value="PENDING">Pending</option>
-          <option value="COMPLETE">Completed</option>
+          <option value="COMPLETE">Complete</option>
           <option value="CANCELLED">Cancelled</option>
         </select>
 
@@ -131,15 +118,12 @@ const DoctorDashboard = () => {
 
       {/* Appointment List */}
       {appointments.length === 0 ? (
-        <p className="text-center mt-20 mb-20">No appointments found.</p>
+        <p className="text-center text-gray-500 mt-10">No appointments found.</p>
       ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {appointments.map((appt) => (
-            <li
-              key={appt._id}
-              className="border p-4 rounded shadow hover:shadow-lg transition"
-            >
-              <div className="flex items-center gap-4 mb-2">
+            <li key={appt._id} className="border p-4 rounded-lg shadow hover:shadow-lg transition">
+              <div className="flex items-center gap-4 mb-3">
                 <img
                   src={appt.patient.photo_url || "/default-patient.png"}
                   alt={appt.patient.name}
@@ -147,14 +131,12 @@ const DoctorDashboard = () => {
                 />
                 <div>
                   <p className="font-bold">{appt.patient.name}</p>
-                  {appt.patient.email && (
-                    <p className="text-gray-600 text-sm">{appt.patient.email}</p>
-                  )}
+                  {appt.patient.email && <p className="text-gray-600 text-sm">{appt.patient.email}</p>}
                 </div>
               </div>
+
               <p>
-                <strong>Date:</strong>{" "}
-                {new Date(appt.date).toLocaleDateString()}
+                <strong>Date:</strong> {new Date(appt.date).toLocaleDateString()}
               </p>
               <p>
                 <strong>Status:</strong> {appt.status}
@@ -167,7 +149,7 @@ const DoctorDashboard = () => {
 
               {/* Action buttons */}
               {appt.status === "PENDING" && (
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2 mt-3">
                   <button
                     onClick={() => updateStatus(appt._id, "COMPLETE")}
                     className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
@@ -188,7 +170,7 @@ const DoctorDashboard = () => {
       )}
 
       {/* Pagination */}
-      <div className="flex justify-center mt-6 gap-2">
+      <div className="flex justify-center mt-6 gap-3">
         <button
           onClick={() => setPage(Math.max(page - 1, 1))}
           disabled={page === 1}

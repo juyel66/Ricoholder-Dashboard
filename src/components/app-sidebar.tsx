@@ -15,6 +15,7 @@ import { getCurrentUser, logoutUser } from "@/Component/Auth/AuthFuction";
 const doctor_routes = [
   { title: "Appointments List", url: "/appointment-list", icon: Home },
   { title: "Appointment Manage", url: "/appointment-management", icon: BarChart2 },
+  { title: "Doctor Profile", url: "/doctor-profile", icon: CgProfile },
 ];
 
 const patient_routes = [

@@ -4,7 +4,7 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
 import DashboardPage from "./Component/Dashboard/DashboardPage";
-import DashboardContent from "./Component/Dashboard/DashboardContent";
+
 
 import SignUp from "./Component/Auth/SignUp";
 import SignIn from "./Component/Auth/SignIn";
@@ -16,6 +16,7 @@ import MyAppointments from "./Component/Dashboard/Patient/MyAppointments";
 import PatientProfile from "./Component/Dashboard/Patient/PatientProfile";
 
 import { getCurrentUser } from "./Component/Auth/AuthFuction";
+import DoctorProfile from "./Component/Dashboard/Doctor/DoctorProfile";
 
 // Protected Route wrapper
 const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
         children: [
           { path: "appointment-list", element: <AppointmentList /> },
           { path: "appointment-management", element: <Appointments /> },
+          { path: "doctor-profile", element: <DoctorProfile /> },
         ],
       },
 
