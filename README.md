@@ -1,69 +1,100 @@
-# React + TypeScript + Vite
+# Doctor Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive **Doctor Appointment Management System** built with **Next.js, React, Tailwind CSS, and Axios**.  
+This application allows patients to browse doctors, book appointments, and manage their schedules, while doctors can manage their appointments efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
+[Doctor Management Live (Netlify)](https://hishabee-jobs-tasks1.netlify.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Repository
+[GitHub Repository](https://github.com/your-username/doctor-management)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Tech Stack
+- Framework: Next.js (React)
+- Language: TypeScript (optional but supported)
+- Styling: Tailwind CSS
+- API Requests: Axios
+- Form Handling: React Hook Form + Zod
+- State Management: Zustand / Redux Toolkit (optional)
+- API Caching: React Query (optional)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Authentication
+- Login as Doctor or Patient
+- Role-based authentication
+- Registration with real-time validation
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Patient Dashboard
+- Browse & search doctors (paginated)
+- Filter doctors by specialization
+- Book appointments with date picker
+- Manage appointments (view, cancel, filter by status)
+
+### Doctor Dashboard
+- View patient appointments (paginated)
+- Filter appointments by date or status
+- Update appointment status: Completed / Cancelled
+
+### UI/UX
+- Modern responsive design
+- Mobile-first approach
+- Loading & error states
+- Notifications (success & error handling)
+
+---
+
+## Notes from Developer
+- In this task, I focused more on functionality rather than design.  
+- Some features are missing due to time limitation.  
+- If I had one more day, I could have refined the design further, added more features, and delivered a much more polished version.  
+
+---
+
+## API Endpoints
+
+Base URL:  
+`https://appointment-manager-node.onrender.com/api/v1`
+
+### Auth
+- `POST /auth/login`
+- `POST /auth/register/patient`
+- `POST /auth/register/doctor`
+
+### Doctors
+- `GET /doctors?page={page}&limit={limit}&search={name?}&specialization={specialization?}`
+
+### Specializations
+- `GET /specializations`
+
+### Appointments
+- `POST /appointments`
+- `GET /appointments/patient?status={status?}&page={page}`
+- `GET /appointments/doctor?status={status?}&date={yyyy-mm-dd?}&page={page}`
+- `PATCH /appointments/update-status`
+
+---
+
+## Screens (Main Pages)
+- `/login` → Login page with role selection  
+- `/register` → Doctor/Patient registration with tabs  
+- `/patient/dashboard` → Patient doctor list, search & filter  
+- `/patient/appointments` → Patient’s appointment management  
+- `/doctor/dashboard` → Doctor’s appointment management  
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/doctor-management.git
+cd doctor-management
