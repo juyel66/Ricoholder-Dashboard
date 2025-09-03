@@ -117,7 +117,7 @@ const PatientDashboard = () => {
       <h1 className="text-2xl font-bold mb-4">Patient Dashboard</h1>
 
       {/* Search & Filter */}
-      <div className="flex gap-4 mb-4 w-40 items-center">
+      <div className="lg:flex  gap-4 mb-4 w-40 items-center">
         <input
           type="text"
           placeholder="Search doctors..."
@@ -129,7 +129,7 @@ const PatientDashboard = () => {
         <select
           value={specialization}
           onChange={handleSpecializationChange}
-          className="border px-3 py-2 rounded"
+          className="border mt-2 px-3 py-2 rounded"
         >
           <option value="">All Specializations</option>
           <option value="Cardiologist">Cardiologist</option>

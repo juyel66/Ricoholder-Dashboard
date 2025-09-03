@@ -73,9 +73,9 @@ const Navbar = () => {
 
           <div className="flex  items-center gap-2 ">
             <CgProfile className="text-xl lg:flex md:flex hidden text-white" />
-            <Link to="/signIn" className="lg:text-xl lg:flex md:flex hidden text-white">
+            {/* <Link to="/signIn" className="lg:text-xl lg:flex md:flex hidden text-white">
               Sign in
-            </Link>
+            </Link> */}
           </div>
           <IoSettingsOutline className="text-xl ml-2 text-white lg:flex md:flex hidden" />
           <MdOutlineNotifications className="text-xl ml-2 lg:flex md:flex hidden text-white" />
