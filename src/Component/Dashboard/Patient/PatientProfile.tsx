@@ -29,7 +29,7 @@ const PatientProfile = () => {
             <span className="text-white text-xl">No Photo</span>
           </div>
         )}
-        <h1 className="text-3xl font-bold">{name}</h1>
+        <h1 className="text-3xl text-white font-bold">{name}</h1>
         <p className="text-white mt-1">{email}</p>
       </div>
 

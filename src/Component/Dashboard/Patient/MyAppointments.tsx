@@ -45,7 +45,7 @@ const MyAppointments = () => {
   }, [page, statusFilter]);
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="p-4 md:p-8 text-white">
       <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
         My Appointments
       </h1>
@@ -66,11 +66,11 @@ const MyAppointments = () => {
 
       {/* Appointments List */}
       {loading ? (
-        <p className="text-center text-gray-500 mt-20">
+        <p className="text-center text-white mt-20">
           Loading your appointments...
         </p>
       ) : appointments.length === 0 ? (
-        <p className="text-center text-gray-500 mt-20 mb-20">
+        <p className="text-center text-white mt-20 mb-20">
           No appointments available.
         </p>
       ) : (
@@ -84,10 +84,10 @@ const MyAppointments = () => {
                 <h2 className="font-semibold text-lg mb-2">
                   Doctor: {appt.doctor?.name || "N/A"}
                 </h2>
-                <p className="text-gray-600 mb-1">
+                <p className="text-white mb-1">
                   Date: {new Date(appt.date).toLocaleDateString()}
                 </p>
-                <p className="text-gray-600 mb-1">
+                <p className="text-white mb-1">
                   Status:{" "}
                   <span
                     className={`font-semibold ${
