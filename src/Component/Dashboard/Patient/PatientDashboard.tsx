@@ -113,28 +113,28 @@ const PatientDashboard = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="p-4">
+    <div className="p-4 text-white">
       <h1 className="text-2xl font-bold mb-4">Patient Dashboard</h1>
 
       {/* Search & Filter */}
-      <div className="lg:flex  gap-4 mb-4 w-40 items-center">
+      <div className="lg:flex text-white gap-4 mb-4 w-40 items-center">
         <input
           type="text"
           placeholder="Search doctors..."
           value={search}
           onChange={handleSearchChange}
-          className="border px-3 py-2 rounded flex-1"
+          className="border px-3   py-2 rounded flex-1"
         />
 
         <select
           value={specialization}
           onChange={handleSpecializationChange}
-          className="border mt-2 px-3 py-2 rounded"
+          className="border  mt-2 px-3 py-2 rounded"
         >
-          <option value="">All Specializations</option>
-          <option value="Cardiologist">Cardiologist</option>
-          <option value="Dentist">Dentist</option>
-          <option value="Neurologist">Neurologist</option>
+          <option value="" className="text-white">All Specializations</option>
+          <option value="Cardiologist" className="text-black">Cardiologist</option>
+          <option value="Dentist" className="text-black">Dentist</option>
+          <option value="Neurologist" className="text-black">Neurologist</option>
         </select>
       </div>
 
@@ -147,11 +147,11 @@ const PatientDashboard = () => {
           >
             <img
               src={doctor.photo_url || "/default-doctor.png"}
-              alt={doctor.name}
-              className="w-24 h-24 object-cover rounded-full mb-2"
+              alt=""
+              className="w-24 border-2 h-24 object-cover rounded-full mb-2"
             />
             <h2 className="font-bold">{doctor.name}</h2>
-            <p className="text-gray-600">{doctor.specialization}</p>
+            <p className="text-white">{doctor.specialization}</p>
 
             <button
               className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
@@ -196,17 +196,17 @@ const PatientDashboard = () => {
           </form>
           {selectedDoctor && (
             <>
-              <h3 className="font-bold text-lg mb-4">
+              <h3 className="font-bold text-lg text-gray-700 mb-4">
                 Book Appointment with {selectedDoctor.name}
               </h3>
-              <form onSubmit={handleBookAppointment} className="space-y-4">
+              <form  onSubmit={handleBookAppointment} className="space-y-4">
                 <div>
-                  <label className="block mb-1">Date:</label>
+                  <label className="block mb-1 text-gray-700 ">Date:</label>
                   <input
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full border rounded px-3 py-2"
+                    className="w-full text-black border rounded px-3 py-2"
                     required
                   />
                 </div>

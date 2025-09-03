@@ -92,7 +92,7 @@ const DoctorDashboard = () => {
   if (error) return <div className="p-5 text-center text-red-500">{error}</div>;
 
   return (
-    <div className="p-5 max-w-6xl mx-auto">
+    <div className="p-5 max-w-6xl mx-auto text-white">
       <h1 className="text-3xl font-bold mb-5">Doctor Dashboard</h1>
 
       {/* Filters */}
@@ -131,7 +131,7 @@ const DoctorDashboard = () => {
                 />
                 <div>
                   <p className="font-bold">{appt.patient.name}</p>
-                  {appt.patient.email && <p className="text-gray-600 text-sm">{appt.patient.email}</p>}
+                  {appt.patient.email && <p className=" text-sm text-gray-300">{appt.patient.email}</p>}
                 </div>
               </div>
 

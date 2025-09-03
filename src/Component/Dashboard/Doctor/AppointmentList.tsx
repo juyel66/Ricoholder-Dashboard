@@ -87,7 +87,7 @@ const DoctorDashboard = () => {
   if (error) console.warn(error); // Warning in console
 
   return (
-    <div className="p-4">
+    <div className="p-4 text-white">
       <h1 className="text-2xl font-bold mb-4">Doctor Dashboard</h1>
 
       {/* Filters */}
@@ -98,9 +98,9 @@ const DoctorDashboard = () => {
           className="border px-3 py-2 rounded"
         >
           <option value="">All Status</option>
-          <option value="PENDING">Pending</option>
-          <option value="COMPLETED">Completed</option>
-          <option value="CANCELLED">Cancelled</option>
+          <option value="PENDING" className="text-black">Pending</option>
+          <option value="COMPLETED"  className="text-black">Completed</option>
+          <option value="CANCELLED"  className="text-black">Cancelled</option>
         </select>
 
         <input
@@ -126,7 +126,7 @@ const DoctorDashboard = () => {
                 />
                 <div>
                   <p className="font-bold">{appt.patient.name}</p>
-                  {appt.patient.email && <p className="text-gray-600 text-sm">{appt.patient.email}</p>}
+                  {appt.patient.email && <p className="text-gray-400 text-sm">{appt.patient.email}</p>}
                 </div>
               </div>
               <p><strong>Date:</strong> {new Date(appt.date).toLocaleDateString()}</p>
