@@ -1,4 +1,4 @@
-import { Home, BarChart2, CreditCard, LogOut } from "lucide-react";
+import { Home, BarChart2, CreditCard, LogOut, Medal, ChartScatter, SquareChartGantt, ReceiptCent, TableProperties, Megaphone, School, CircleQuestionMark, UserRoundPen } from "lucide-react";
 import { CgProfile } from "react-icons/cg";
 import {
   Sidebar,
@@ -16,20 +16,20 @@ const doctor_routes = [
   { title: "Dashboard", url: "/admin-dashboard", icon: Home },
   { title: "Properties", url: "/properties", icon: BarChart2 },
   { title: "Agent", url: "/agent", icon: CgProfile },
-  { title: "Media Library", url: "/media-library", icon: CgProfile },
-  { title: "analytics", url: "/analytics", icon: CgProfile },
-  { title: "Activity Logs", url: "/activity-logs", icon: CgProfile },
+  { title: "Media Library", url: "/media-library", icon: Medal },
+  { title: "analytics", url: "/analytics", icon: ChartScatter },
+  { title: "Activity Logs", url: "/activity-logs", icon: SquareChartGantt },
 
 ];
 
 const patient_routes = [
-  { title: "Properties-Rentals", url: "/properties-rentals", icon: Home },
+  { title: "Properties-Rentals", url: "/properties-rentals", icon: ReceiptCent },
   { title: "Properties-sales", url: "/properties-sales", icon: CreditCard },
-  { title: "Calendars", url: "/calendars", icon: CgProfile },
-  { title: "Announcements", url: "/announcements", icon: CgProfile },
-  { title: "Resources", url: "/resources", icon: CgProfile },
-  { title: "FAQs", url: "/faqs", icon: CgProfile },
-  { title: "Profile", url: "/profile", icon: CgProfile },
+  { title: "Calendars", url: "/calendars", icon: TableProperties },
+  { title: "Announcements", url: "/announcements", icon: Megaphone },
+  { title: "Resources", url: "/resources", icon: School },
+  { title: "FAQs", url: "/faqs", icon: CircleQuestionMark },
+  { title: "Profile", url: "/profile", icon: UserRoundPen },
 
 ];
 
@@ -37,7 +37,7 @@ const AppSidebar = () => {
   // const navigate = useNavigate();
   // const currentUser = getCurrentUser();
   // const role = currentUser?.user?.role;
-  const role = "ADMIN";
+  const role = "AGENT";
 
   const routesToRender =
     role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];

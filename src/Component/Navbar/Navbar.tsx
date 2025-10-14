@@ -46,30 +46,17 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <label className="input rounded-4xl w-[199px]  bg-[#0F1535] mr-2">
-            <svg
-              className="h-[1em] text-white opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              className="text-white  "
-              type="search"
-              required
-              placeholder="Type here..."
-            />
-          </label>
+
+          <div className="flex items-center gap-4 pb-2 pt-2">
+            <img className="h-15 w-15" src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760485758/Button_ivncwe.png" alt="" />
+            <div>
+              <p className="text-xl ">Admin User</p>
+              <p>super admin</p>
+            </div>
+          </div>
+
+
+          
 
           <div className="flex  items-center gap-2 ">
             <CgProfile className="text-xl lg:flex md:flex hidden text-white" />
