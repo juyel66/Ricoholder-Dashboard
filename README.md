@@ -1,12 +1,12 @@
-# Doctor Management
+# ADMIN Management
 
-A modern, responsive **Doctor Appointment Management System** built with **React, Typescript, Context API, Tailwind CSS, and Axios**.  
-This application allows patients to browse doctors, book appointments, and manage their schedules, while doctors can manage their appointments efficiently.
+A modern, responsive **ADMIN Appointment Management System** built with **React, Typescript, Context API, Tailwind CSS, and Axios**.  
+This application allows patients to browse ADMINs, book appointments, and manage their schedules, while ADMINs can manage their appointments efficiently.
 
 ---
 
 ## Live Demo
-[Doctor Management Live (Netlify)](https://hishabee-jobs-tasks1.netlify.app/)
+[ADMIN Management Live (Netlify)](https://hishabee-jobs-tasks1.netlify.app/)
 
 ---
 
@@ -24,17 +24,17 @@ This application allows patients to browse doctors, book appointments, and manag
 ## Features
 
 ### Authentication
-- Login as Doctor or Patient
+- Login as ADMIN or Patient
 - Role-based authentication
 - Registration with real-time validation
 
 ### Patient Dashboard
-- Browse & search doctors (paginated)
-- Filter doctors by specialization
+- Browse & search ADMINs (paginated)
+- Filter ADMINs by specialization
 - Book appointments with date picker
 - Manage appointments (view, cancel, filter by status)
 
-### Doctor Dashboard
+### ADMIN Dashboard
 - View patient appointments (paginated)
 - Filter appointments by date or status
 - Update appointment status: Completed / Cancelled
@@ -62,10 +62,10 @@ Base URL:
 ### Auth
 - `POST /auth/login`
 - `POST /auth/register/patient`
-- `POST /auth/register/doctor`
+- `POST /auth/register/ADMIN`
 
-### Doctors
-- `GET /doctors?page={page}&limit={limit}&search={name?}&specialization={specialization?}`
+### ADMINs
+- `GET /ADMINs?page={page}&limit={limit}&search={name?}&specialization={specialization?}`
 
 ### Specializations
 - `GET /specializations`
@@ -73,17 +73,17 @@ Base URL:
 ### Appointments
 - `POST /appointments`
 - `GET /appointments/patient?status={status?}&page={page}`
-- `GET /appointments/doctor?status={status?}&date={yyyy-mm-dd?}&page={page}`
+- `GET /appointments/ADMIN?status={status?}&date={yyyy-mm-dd?}&page={page}`
 - `PATCH /appointments/update-status`
 
 ---
 
 ## Screens (Main Pages)
 - `/login` → Login page with role selection  
-- `/register` → Doctor/Patient registration with tabs  
-- `/patient/dashboard` → Patient doctor list, search & filter  
+- `/register` → ADMIN/Patient registration with tabs  
+- `/patient/dashboard` → Patient ADMIN list, search & filter  
 - `/patient/appointments` → Patient’s appointment management  
-- `/doctor/dashboard` → Doctor’s appointment management  
+- `/ADMIN/dashboard` → ADMIN’s appointment management  
 
 ---
 
@@ -91,5 +91,5 @@ Base URL:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/doctor-management.git
-cd doctor-management
+git clone https://github.com/your-username/ADMIN-management.git
+cd ADMIN-management

@@ -1,4 +1,4 @@
-import { Home, BarChart2, CreditCard, LogOut } from "lucide-react";      
+import { Home, BarChart2, CreditCard, LogOut } from "lucide-react";
 import { CgProfile } from "react-icons/cg";
 import {
   Sidebar,
@@ -9,33 +9,43 @@ import {
 } from "./ui/sidebar";
 
 import CustomIcon from "@/Component/customIcons/customIcons";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getCurrentUser, logoutUser } from "@/Component/Auth/AuthFuction";
+import { NavLink } from "react-router-dom";
+// import { getCurrentUser, logoutUser } from "@/Component/Auth/AuthFuction";
 
 const doctor_routes = [
-  { title: "Appointments List", url: "/appointment-list", icon: Home },
-  { title: "Appointment Manage", url: "/appointment-management", icon: BarChart2 },
-  { title: "Doctor Profile", url: "/doctor-profile", icon: CgProfile },
+  { title: "Dashboard", url: "/admin-dashboard", icon: Home },
+  { title: "Properties", url: "/properties", icon: BarChart2 },
+  { title: "Agent", url: "/agent", icon: CgProfile },
+  { title: "Media Library", url: "/media-library", icon: CgProfile },
+  { title: "analytics", url: "/analytics", icon: CgProfile },
+  { title: "Activity Logs", url: "/activity-logs", icon: CgProfile },
+
 ];
 
 const patient_routes = [
-  { title: "Patient Dashboard", url: "/patient-dashboard", icon: Home },
-  { title: "My Appointments", url: "/my-appointments", icon: CreditCard },
-  { title: "Patient Profile", url: "/patient-profile", icon: CgProfile }, 
+  { title: "Properties-Rentals", url: "/properties-rentals", icon: Home },
+  { title: "Properties-sales", url: "/properties-sales", icon: CreditCard },
+  { title: "Calendars", url: "/calendars", icon: CgProfile },
+  { title: "Announcements", url: "/announcements", icon: CgProfile },
+  { title: "Resources", url: "/resources", icon: CgProfile },
+  { title: "FAQs", url: "/faqs", icon: CgProfile },
+  { title: "Profile", url: "/profile", icon: CgProfile },
+
 ];
 
 const AppSidebar = () => {
-  const navigate = useNavigate();
-  const currentUser = getCurrentUser();
-  const role = currentUser?.user?.role;
+  // const navigate = useNavigate();
+  // const currentUser = getCurrentUser();
+  // const role = currentUser?.user?.role;
+  const role = "ADMIN";
 
   const routesToRender =
-    role === "DOCTOR" ? doctor_routes : role === "PATIENT" ? patient_routes : [];
+    role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];
 
-  const handleLogout = () => {
-    logoutUser();
-    navigate("/signin");
-  };
+  // const handleLogout = () => {
+  //   logoutUser();
+  //   navigate("/signin");
+  // };
 
   return (
     <Sidebar>
@@ -44,35 +54,35 @@ const AppSidebar = () => {
           {role && (
             <>
               <p className="mt-5 ml-10 text-white mb-5 px-2 text-[24px]">
-                {role === "DOCTOR" ? "DOCTOR" : "PATIENT"}
-                
-                
+                {role === "ADMIN" ? "ADMIN" : "AGENT"}
               </p>
               <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent mb-3" />
               {routesToRender.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton>
-                    <NavLink
-                      to={item.url}
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 ${
+                  <NavLink to={item.url}>
+                    {({ isActive }) => (
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className={`p-0 ${
                           isActive
-                            ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"
-                            : "text-white"
-                        }`
-                      }
-                    >
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </NavLink>
-                  </SidebarMenuButton>
+                            ? " text-black rounded-md"
+                            : "text-white hover:bg-gray-800 rounded-md"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 w-full h-full p-2">
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </div>
+                      </SidebarMenuButton>
+                    )}
+                  </NavLink>
                 </SidebarMenuItem>
               ))}
-              {/* Logout button */}
-              <div className="my-5 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+              <div className="my-5 mt-10 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={handleLogout} className="cursor-pointer">
-                  <div className="flex items-center gap-2 text-white">
+                <SidebarMenuButton  className="cursor-pointer hover:bg-gray-800 rounded-md">
+                  <div className="flex items-center gap-2  text-white">
                     <LogOut />
                     <span>Logout</span>
                   </div>
@@ -81,28 +91,30 @@ const AppSidebar = () => {
             </>
           )}
 
-          {/* Account Pages - only show if no user logged in */}
           {!role &&
             [
               { title: "Sign In", url: "/signin", icon: BarChart2 },
               { title: "Sign Up", url: "/signup", icon: CustomIcon },
             ].map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton>
-                  <NavLink
-                    to={item.url}
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 ${
+                <NavLink to={item.url}>
+                  {({ isActive }) => (
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className={`p-0 ${
                         isActive
-                          ? "text-white bg-[#1A1F37] rounded-xl w-full p-2"
-                          : "text-white"
-                      }`
-                    }
-                  >
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </NavLink>
-                </SidebarMenuButton>
+                          ? " text-black rounded-md"
+                          : "text-white hover:bg-gray-800 rounded-md"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 w-full h-full p-2">
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </div>
+                    </SidebarMenuButton>
+                  )}
+                </NavLink>
               </SidebarMenuItem>
             ))}
         </SidebarMenu>

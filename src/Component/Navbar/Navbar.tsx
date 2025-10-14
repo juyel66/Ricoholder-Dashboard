@@ -2,7 +2,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineNotifications } from "react-icons/md";
-import { Link, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 
 const Navbar = () => {
   // const {pathname} = useLocation();
@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar">
+      <div className="navbar p-0 border-b-2">
         <div className="navbar-start">
           <div className="lg:hidden">
             {" "}
@@ -38,10 +38,10 @@ const Navbar = () => {
           </div>
 
           <div>
-            <p className="text-[#e3dcdcc9] lg:flex md:flex hidden">
-              Pages <span className="text-white">/ {displayName} </span>
+            <p className="lg:flex md:flex hidden">
+              Pages <span className="">/ {displayName} </span>
             </p>
-            <p className="text-xl text-white ">{displayName}</p>
+            <p className="text-xl  ">{displayName}</p>
           </div>
         </div>
 
