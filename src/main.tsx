@@ -133,6 +133,7 @@ import Resources from "./Component/Agent/Resources/Resources";
 import FAQs from "./Component/Agent/FaQs/FAQs";
 import Profile from "./Component/Agent/Profile/Profile";
 import Announcements from "./Component/Agent/Announcements/Announcements";
+import CreateProperty from "./Component/Admin/Properties/CreateProperty";
 
 // Protected Route wrapper - API functionality removed
 // Now acts as a simple wrapper (pass-through) for the children routes.
@@ -172,7 +173,7 @@ const router = createBrowserRouter([
       // Doctor routes
       {
         // ProtectedRoute is a structural element now, no auth check
-        element: <ProtectedRoute allowedRoles={["DOCTOR"]} />,
+        element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
         children: [
           { path: "admin-dashboard", element: <AdminDashboard /> },
           { path: "properties", element: <Properties /> },
@@ -180,13 +181,14 @@ const router = createBrowserRouter([
           { path: "media-library", element: < MediaLibrary/> },
           { path: "analytics", element: < Analytics/> },
           { path: "activity-logs", element: < ActivityLogs/> },
+          {path:"create-property", element:< CreateProperty />}
         ],
       },
 
       // Patient routes
       {
         // ProtectedRoute is a structural element now, no auth check
-        element: <ProtectedRoute allowedRoles={["PATIENT"]} />,
+        element: <ProtectedRoute allowedRoles={["AGENT"]} />,
         children: [
           { path: "properties-rentals", element: <PropertiesRentals /> },
           { path: "properties-sales", element: <PropertiesSales /> },
