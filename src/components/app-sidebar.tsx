@@ -40,7 +40,7 @@ const AppSidebar = () => {
   const role = "ADMIN";
 
   const routesToRender =
-    role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];
+    role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];  
 
   // const handleLogout = () => {
   //   logoutUser();
