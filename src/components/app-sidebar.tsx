@@ -37,7 +37,7 @@ const AppSidebar = () => {
   // const navigate = useNavigate();
   // const currentUser = getCurrentUser();
   // const role = currentUser?.user?.role;
-  const role = "AGENT";
+  const role = "ADMIN";
 
   const routesToRender =
     role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];
