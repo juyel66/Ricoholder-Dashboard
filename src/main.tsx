@@ -134,6 +134,7 @@ import FAQs from "./Component/Agent/FaQs/FAQs";
 import Profile from "./Component/Agent/Profile/Profile";
 import Announcements from "./Component/Agent/Announcements/Announcements";
 import CreateProperty from "./Component/Admin/Properties/CreateProperty";
+import ManageProperties from "./Component/Admin/Agent/ManageProperties";
 
 // Protected Route wrapper - API functionality removed
 // Now acts as a simple wrapper (pass-through) for the children routes.
@@ -170,7 +171,7 @@ const router = createBrowserRouter([
         element: <DefaultDashboardRedirect />, // redirect user based on a dummy check
       },
 
-      // Doctor routes
+      // Admin routes
       {
         // ProtectedRoute is a structural element now, no auth check
         element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
@@ -181,11 +182,12 @@ const router = createBrowserRouter([
           { path: "media-library", element: < MediaLibrary/> },
           { path: "analytics", element: < Analytics/> },
           { path: "activity-logs", element: < ActivityLogs/> },
-          {path:"create-property", element:< CreateProperty />}
+          {path:"create-property", element:< CreateProperty />},
+          {path:"manage-property", element:<ManageProperties />},
         ],
       },
 
-      // Patient routes
+      // Agent routes
       {
         // ProtectedRoute is a structural element now, no auth check
         element: <ProtectedRoute allowedRoles={["AGENT"]} />,
