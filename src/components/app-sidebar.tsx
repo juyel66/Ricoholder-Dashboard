@@ -17,7 +17,7 @@ const doctor_routes = [
   { title: "Properties", url: "/properties", icon: BarChart2 },
   { title: "Agent", url: "/agent", icon: CgProfile },
   { title: "Media Library", url: "/media-library", icon: Medal },
-  { title: "analytics", url: "/analytics", icon: ChartScatter },
+  { title: "Analytics", url: "/analytics", icon: ChartScatter },
   { title: "Activity Logs", url: "/activity-logs", icon: SquareChartGantt },
 
 ];
@@ -37,7 +37,7 @@ const AppSidebar = () => {
   // const navigate = useNavigate();
   // const currentUser = getCurrentUser();
   // const role = currentUser?.user?.role;
-  const role = "ADMIN";
+  const role = "AGENT";
 
   const routesToRender =
     role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];  
