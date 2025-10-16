@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Mail, Phone, MoreVertical, Download } from 'lucide-react';
 
 const getInitials = (name) =>
@@ -60,7 +60,7 @@ const AgentCard = ({ agent }) => {
         </div>
 
         <span className="inline-block px-3 py-1 text-sm font-medium rounded-md bg-purple-100 text-purple-700 mb-6">
-          Agent
+          {agent.role}
         </span>
 
         {/* Contact Info */}
