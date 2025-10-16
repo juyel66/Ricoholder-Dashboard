@@ -6,7 +6,7 @@ This application allows patients to browse ADMINs, book appointments, and manage
 ---
 
 ## Live Demo
-[ADMIN Management Live (Netlify)](https://hishabee-jobs-tasks1.netlify.app/)
+[ADMIN Management Live (Netlify)](link here)
 
 ---
 
