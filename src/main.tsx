@@ -135,6 +135,7 @@ import Profile from "./Component/Agent/Profile/Profile";
 import Announcements from "./Component/Agent/Announcements/Announcements";
 import CreateProperty from "./Component/Admin/Properties/CreateProperty";
 import ManageProperties from "./Component/Admin/Agent/ManageProperties";
+import PropertiesRentalsDetails from "./Component/Agent/PropertiesRentals/PropertiesRentalsDetails";
 
 // Protected Route wrapper - API functionality removed
 // Now acts as a simple wrapper (pass-through) for the children routes.
@@ -200,6 +201,7 @@ const router = createBrowserRouter([
           { path: "faqs", element: <FAQs /> },
       
           { path: "profile", element: <Profile /> },
+          { path: "property-rentals-update", element: <PropertiesRentalsDetails/> },
         ],
       },
     ],
