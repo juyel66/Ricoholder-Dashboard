@@ -27,7 +27,7 @@ const updateData: Update[] = [
     title: 'New Marketing Guidelines Released',
     date: 'October 11, 2025',
     priority: 'high',
-    details: 'We have updated our marketing guidelines to reflect the latest brand standards. Please review the attached document for detailed information on approved messaging, logo usage, and social media best practices.',
+    details: 'We have updated our marketing guidelines to reflect the latest brand standards. Please review the attached document for detailed information on approved messaging, logo usage, and social media best practices.'
     attachments: [
       { name: 'Marketing_Guidelines_2025.pdf', size: '2.3 MB', downloadUrl: '#' },
     ],
