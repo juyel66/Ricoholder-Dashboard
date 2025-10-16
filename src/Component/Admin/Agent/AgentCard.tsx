@@ -1,5 +1,6 @@
-
-import { Mail, Phone, MoreVertical, Download } from 'lucide-react';
+import { Mail, Phone, MoreVertical, Download, Edit, X, Trash2, Building2 } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const getInitials = (name) =>
   name
@@ -19,33 +20,69 @@ const getStatusClass = (status) => {
   }
 };
 
-// Validate permission to only allowed 3 types
 const validatePermission = (permission) => {
   const allowed = ['only view', 'full access', 'download'];
   return allowed.includes(permission.toLowerCase()) ? permission : 'Only View';
 };
 
 const AgentCard = ({ agent }) => {
+  const [openMenu, setOpenMenu] = useState(false);
   const initials = getInitials(agent.name);
   const permission = validatePermission(agent.permissions);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 flex flex-col justify-between w-full h-full">
+    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 flex flex-col justify-between w-full h-full relative">
       <div>
         {/* Header */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex justify-between items-start mb-6 relative">
           <div className="flex items-center space-x-4">
             <div className="h-16 w-16 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 font-semibold text-xl border border-gray-300">
               {initials}
             </div>
           </div>
-          <button
-            className="p-1 rounded-full text-gray-400 hover:bg-gray-100 transition-colors"
-            aria-label="More options"
-            onClick={() => console.log('More options clicked for ' + agent.name)}
-          >
-            <MoreVertical className="w-5 h-5" />
-          </button>
+          <div className="relative">
+            <button
+              className="p-1 rounded-full text-gray-400 hover:bg-gray-100 transition-colors"
+              aria-label="More options"
+              onClick={() => setOpenMenu(!openMenu)}
+            >
+              <MoreVertical className="w-5 h-5" />
+            </button>
+
+            {openMenu && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+                <button
+                  className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => console.log('Edit Details clicked')}
+                >
+                  <Edit className="w-4 h-4 mr-2" /> Edit Details
+                </button>
+
+                <Link
+                  to="/manage-property"
+                  className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  <Building2 className="w-4 h-4 mr-2" /> Manage Properties
+                </Link>
+
+                <button
+                  className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => console.log('Deactivate clicked')}
+                >
+                  <X className="w-4 h-4 mr-2" /> Deactivate
+                </button>
+
+                <hr className="my-1" />
+
+                <button
+                  className="flex items-center w-full px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+                  onClick={() => console.log('Delete clicked')}
+                >
+                  <Trash2 className="w-4 h-4 mr-2" /> Delete
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Agent Info */}
