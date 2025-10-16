@@ -1,33 +1,14 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 import { Clock, Download, ChevronDown, ChevronUp, FileText } from 'lucide-react';
 
 // --- 1. JSON DATA ---
-
-// --- TYPE DEFINITIONS ---
-interface Attachment {
-  name: string;
-  size: string;
-  downloadUrl: string;
-}
-
-type Priority = 'high' | 'medium' | 'low';
-
-interface Update {
-  id: number;
-  title: string;
-  date: string;
-  priority: Priority;
-  details: string;
-  attachments: Attachment[];
-}
-
-const updateData: Update[] = [
+const updateData = [
   {
     id: 1,
     title: 'New Marketing Guidelines Released',
     date: 'October 11, 2025',
     priority: 'high',
-    details: 'We have updated our marketing guidelines to reflect the latest brand standards. Please review the attached document for detailed information on approved messaging, logo usage, and social media best practices.'
+    details: 'We have updated our marketing guidelines to reflect the latest brand standards. Please review the attached document for detailed information on approved messaging, logo usage, and social media best practices.',
     attachments: [
       { name: 'Marketing_Guidelines_2025.pdf', size: '2.3 MB', downloadUrl: '#' },
     ],
@@ -67,12 +48,8 @@ const updateData: Update[] = [
 
 // --- 2. COMPONENTS ---
 
-interface PriorityBadgeProps {
-  priority: Priority;
-}
-
 // Helper component for the priority badge styling
-const PriorityBadge: FC<PriorityBadgeProps> = ({ priority }) => {
+const PriorityBadge = ({ priority }) => {
   let bgColor, textColor;
   switch (priority) {
     case 'high':
@@ -96,12 +73,8 @@ const PriorityBadge: FC<PriorityBadgeProps> = ({ priority }) => {
   );
 };
 
-interface AttachmentItemProps {
-  attachment: Attachment;
-}
-
 // Component for a single downloadable attachment
-const AttachmentItem: FC<AttachmentItemProps> = ({ attachment }) => (
+const AttachmentItem = ({ attachment }) => (
     <div className="flex justify-between items-center p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:border-teal-500 transition duration-150">
         <div className="flex items-center space-x-3">
             <FileText className="w-5 h-5 text-blue-500 flex-shrink-0" />
@@ -122,12 +95,8 @@ const AttachmentItem: FC<AttachmentItemProps> = ({ attachment }) => (
     </div>
 );
 
-interface UpdateCardProps {
-  update: Update;
-}
-
 // Component for a single collapsible update card
-const UpdateCard: FC<UpdateCardProps> = ({ update }) => {
+const UpdateCard = ({ update }) => {
   const [isOpen, setIsOpen] = useState(update.id === 2); // Q4 is open by default, as per the image
   
   const attachmentCount = update.attachments.length;
@@ -193,7 +162,7 @@ const UpdateCard: FC<UpdateCardProps> = ({ update }) => {
 };
 
 // --- 3. MAIN APPLICATION COMPONENT ---
-const Announcements: FC = () => {
+const Announcements = () => {
     // Current active category for the filter bar
     const [activeCategory, setActiveCategory] = useState('All');
     
@@ -219,7 +188,6 @@ const Announcements: FC = () => {
                         <input
                             type="text"
                             placeholder="Search Resources..."
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
                             className="w-full  pl-4 pr-12 py-3 border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 transition shadow-sm"
                         />
                         <button className="absolute  right-0 top-0 h-full px-4 text-gray-400">
