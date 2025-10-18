@@ -325,10 +325,10 @@ const SignUp = () => {
             <p className="text-gray-600">
               Already have an account?{" "}
               <Link
-                to="/login"
+                to="/signIn"
                 className="font-semibold text-[#00A597] hover:text-[#008f82] transition duration-150"
               >
-                Login
+                Sign In
               </Link>
             </p>
           </div>
