@@ -209,7 +209,7 @@ const CreateProperty = () => {
                         <Save className="w-5 h-5 mr-2" /> Save as Draft
                     </button>
 
-                    <button
+                    <Link to="/"
                         type="submit"
                         className="flex items-center justify-center w-full sm:w-auto px-4 py-2 text-white bg-teal-600 border border-teal-700 rounded-lg hover:bg-teal-700 transition"
                         onClick={(e) => {
@@ -218,7 +218,7 @@ const CreateProperty = () => {
                         }}
                     >
                         <Plus className="w-5 h-5 mr-2" /> Create Property
-                    </button>
+                    </Link>
                 </div>
             </form>
         </div>
