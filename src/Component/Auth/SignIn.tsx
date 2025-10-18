@@ -148,14 +148,136 @@
 
 
 
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+const EastmondVillasLogo = () => (
+  <div className="flex flex-col items-center justify-center space-y-2 p-6 bg-white rounded-t-xl">
+    <img
+      className="h-16"
+      src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760303130/hd_svg_logo_1_rfsh4e.png"
+      alt="Eastmond Villas Logo"
+    />
+    <h1 className="text-2xl font-semibold text-gray-800">Eastmond Villas</h1>
+  </div>
+);
 
 const SignIn = () => {
+  const [role, setRole] = useState("admin");
+  const [email, setEmail] = useState("admin@realestate.com");
+  const [password, setPassword] = useState("password");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const loginPayload = {
+      user_email: email,
+      user_password: password,
+      user_role: role,
+    };
+    console.log(loginPayload);
+  };
+
   return (
-    <div>
-      This is a singn in page 
-      
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+        <EastmondVillasLogo />
+
+        <div className="flex justify-center bg-gray-50 border-b border-gray-200">
+          <button
+            onClick={() => setRole("admin")}
+            className={`w-1/2 py-3 text-sm font-medium transition rounded-t-lg ${
+              role === "admin"
+                ? "bg-[#00A597] text-white"
+                : "text-gray-600 hover:text-[#00A597]"
+            }`}
+          >
+            Admin Portal
+          </button>
+          <button
+            onClick={() => setRole("agent")}
+            className={`w-1/2 py-3 text-sm font-medium transition rounded-t-lg ${
+              role === "agent"
+                ? "bg-[#00A597] text-white"
+                : "text-gray-600 hover:text-[#00A597]"
+            }`}
+          >
+            Agent Portal
+          </button>
+        </div>
+
+        <div className="px-8 py-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-1 capitalize">
+            {role} Login
+          </h2>
+          <p className="text-sm text-gray-500 mb-6">
+            Access the {role === "admin" ? "admin dashboard" : "agent panel"} to manage
+            properties and agents
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="admin@realestate.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-[#00A597] focus:border-[#00A597] placeholder-gray-400 text-gray-700 text-sm"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-[#00A597] focus:border-[#00A597] text-gray-700 text-sm"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#00A597] hover:bg-[#008f82] text-white font-medium py-3 rounded-md transition duration-150"
+            >
+              Login as {role.charAt(0).toUpperCase() + role.slice(1)}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-xs text-gray-500">
+            Demo: Use any email/password combination
+          </p>
+
+          <div className="mt-4 text-center text-sm">
+            <p className="text-gray-600">
+              Don't have an account?{" "}
+              <Link
+                to="/signUp"
+                className="font-semibold text-[#00A597] hover:text-[#008f82] transition duration-150"
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default SignIn;
+
+
