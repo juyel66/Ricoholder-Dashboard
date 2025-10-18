@@ -160,7 +160,7 @@ const EastmondVillasLogo = () => (
     />
     <h1 className="text-2xl font-semibold text-gray-800">Eastmond Villas</h1>
   </div>
-);
+);    
 
 const SignIn = () => {
   const [role, setRole] = useState("admin");
