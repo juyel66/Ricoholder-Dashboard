@@ -4,7 +4,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineNotifications, MdSearch } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
-
+import { useState, useRef, useEffect } from "react";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -12,11 +12,32 @@ const Navbar = () => {
   const isAdmin = pathname.includes("/admin");
   const isAgent = pathname.includes("/agent");
 
-  console.log("locations", pathname)
+  console.log("locations", pathname);
 
   const userInfo = isAdmin
     ? { name: "Admin User", role: "Super Admin" }
     : { name: "Md Juyel Rana", role: "Agent" };
+
+  // ------------------------------
+  // Dropdown state & ref
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  // ------------------------------
 
   return (
     <div>
@@ -25,8 +46,6 @@ const Navbar = () => {
           <div className="lg:hidden">
             <SidebarTrigger />
           </div>
-
-          
 
           <div className="relative w-full">
             <MdSearch className="absolute left-3 top-1/2 w-7 h-7 transform -translate-y-1/2 text-gray-400 text-lg" />
@@ -39,16 +58,18 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <div className="flex items-center gap-4 pb-2 pt-2">
-            {/* <img
-              className="h-15 w-15"
-              src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760485758/Button_ivncwe.png"
-              alt="user"
-            /> */}
-         <div className="text-4xl mb-2 ">
-             <IoMdNotificationsOutline />
-         </div>
-
+          <div className="flex items-center gap-4 pb-2 pt-2" ref={dropdownRef}>
+            {/* Notification Icon with Dropdown */}
+            <div className="relative text-4xl mb-2 cursor-pointer" onClick={toggleDropdown}>
+              <IoMdNotificationsOutline />
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg border border-gray-200 z-50">
+                  <p className="p-3 text-gray-700 border-b border-gray-200">Notification 1</p>
+                  <p className="p-3 text-gray-700 border-b border-gray-200">Notification 2</p>
+                  <p className="p-3 text-gray-700">Notification 3</p>
+                </div>
+              )}
+            </div>
 
             <div>
               <p className="text-xl">{userInfo.name}</p>
