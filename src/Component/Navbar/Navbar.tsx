@@ -3,6 +3,8 @@ import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineNotifications, MdSearch } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -38,11 +40,16 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex items-center gap-4 pb-2 pt-2">
-            <img
+            {/* <img
               className="h-15 w-15"
               src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760485758/Button_ivncwe.png"
               alt="user"
-            />
+            /> */}
+         <div className="text-4xl mb-2 ">
+             <IoMdNotificationsOutline />
+         </div>
+
+
             <div>
               <p className="text-xl">{userInfo.name}</p>
               <p className="text-gray-500">{userInfo.role}</p>
