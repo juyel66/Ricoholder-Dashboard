@@ -119,7 +119,7 @@ import PatientProfile from "./Component/Dashboard/Patient/PatientProfile";
 // Auth/API-related imports removed or commented out.
 // import { getCurrentUser } from "./Component/Auth/AuthFuction"; 
 import DoctorProfile from "./Component/Dashboard/Doctor/DoctorProfile";
-import Properties from "./Component/Admin/Properties/Properties";
+import Properties from "./Component/Admin/Properties/AdminPropertiesRentals";
 import AdminDashboard from "./Component/Admin/AdminDashboard/AdminDashboard";
 import Agent from "./Component/Admin/Agent/Agent";
 import MediaLibrary from "./Component/Admin/MediaLibrary/MediaLibrary";
@@ -137,6 +137,8 @@ import CreateProperty from "./Component/Admin/Properties/CreateProperty";
 import ManageProperties from "./Component/Admin/Agent/ManageProperties";
 import PropertiesRentalsDetails from "./Component/Agent/PropertiesRentals/PropertiesRentalsDetails";
 import PropertiesRentals from "./Component/Agent/PropertiesSales/PropertiesRentals";
+import AdminPropertiesSales from "./Component/Agent/PropertiesSales/AdminPropertiesSales";
+import AdminPropertiesRentals from "./Component/Admin/Properties/AdminPropertiesRentals";
 
 // Protected Route wrapper - API functionality removed
 // Now acts as a simple wrapper (pass-through) for the children routes.
@@ -179,13 +181,15 @@ const router = createBrowserRouter([
         element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
         children: [
           { path: "admin-dashboard", element: <AdminDashboard /> },
-          { path: "properties", element: <Properties /> },
-          { path: "agent", element: < Agent/> },
-          { path: "media-library", element: < MediaLibrary/> },
-          { path: "analytics", element: < Analytics/> },
-          { path: "activity-logs", element: < ActivityLogs/> },
-          {path:"create-property", element:< CreateProperty />},
-          {path:"manage-property", element:<ManageProperties />},
+          { path: "admin-properties-rentals", element: <AdminPropertiesRentals /> },
+          { path: "admin-properties-sales", element: <AdminPropertiesSales /> },
+          { path: "admin-agent", element: < Agent/> },
+          { path: "admin-media-library", element: < MediaLibrary/> },
+          { path: "admin-analytics", element: < Analytics/> },
+          { path: "admin-activity-logs", element: < ActivityLogs/> },
+          {path:"admin-create-property", element:< CreateProperty />},
+          {path:"admin-manage-property", element:<ManageProperties />},
+          
         ],
       },
 
@@ -195,15 +199,15 @@ const router = createBrowserRouter([
         element: <ProtectedRoute allowedRoles={["AGENT"]} />,
         children: [
           // { path: "properties-rentals", element: <PropertiesRentals /> },
-          { path: "properties-rentals", element: <PropertiesRentals /> },
-           { path: "properties-sales", element: <PropertiesSales /> },
-          { path: "calendars", element: <Calendars /> },
-          { path: "announcements", element: <Announcements /> },
-          { path: "resources", element: <Resources /> },
-          { path: "faqs", element: <FAQs /> },
+          { path: "agent-properties-rentals", element: <PropertiesRentals /> },
+           { path: "agent-properties-sales", element: <PropertiesSales /> },
+          { path: "agent-calendars", element: <Calendars /> },
+          { path: "agent-announcements", element: <Announcements /> },
+          { path: "agent-resources", element: <Resources /> },
+          { path: "agent-faqs", element: <FAQs /> },
       
-          { path: "profile", element: <Profile /> },
-          { path: "property-rentals-details", element: <PropertiesRentalsDetails/> },
+          { path: "agent-profile", element: <Profile /> },
+          { path: "agent-property-rentals-details", element: <PropertiesRentalsDetails/> },
         ],
       },
     ],
