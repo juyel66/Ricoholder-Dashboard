@@ -125,7 +125,7 @@ import Agent from "./Component/Admin/Agent/Agent";
 import MediaLibrary from "./Component/Admin/MediaLibrary/MediaLibrary";
 import Analytics from "./Component/Admin/Analytics/Analytics";
 import ActivityLogs from "./Component/Admin/ActivityLogs/ActivityLogs";
-import PropertiesRentals from "./Component/Agent/PropertiesRentals/PropertiesRentals";
+// import PropertiesRentals from "./Component/Agent/PropertiesRentals/PropertiesRentals";
 import PropertiesSales from "./Component/Agent/PropertiesSales/PropertiesSales";
 import Calendars from "./Component/Agent/Calendars/Calendars";
 import { MdAnnouncement } from "react-icons/md";
@@ -136,6 +136,7 @@ import Announcements from "./Component/Agent/Announcements/Announcements";
 import CreateProperty from "./Component/Admin/Properties/CreateProperty";
 import ManageProperties from "./Component/Admin/Agent/ManageProperties";
 import PropertiesRentalsDetails from "./Component/Agent/PropertiesRentals/PropertiesRentalsDetails";
+import PropertiesRentals from "./Component/Agent/PropertiesSales/PropertiesRentals";
 
 // Protected Route wrapper - API functionality removed
 // Now acts as a simple wrapper (pass-through) for the children routes.
@@ -193,15 +194,16 @@ const router = createBrowserRouter([
         // ProtectedRoute is a structural element now, no auth check
         element: <ProtectedRoute allowedRoles={["AGENT"]} />,
         children: [
+          // { path: "properties-rentals", element: <PropertiesRentals /> },
           { path: "properties-rentals", element: <PropertiesRentals /> },
-          { path: "properties-sales", element: <PropertiesSales /> },
+           { path: "properties-sales", element: <PropertiesSales /> },
           { path: "calendars", element: <Calendars /> },
           { path: "announcements", element: <Announcements /> },
           { path: "resources", element: <Resources /> },
           { path: "faqs", element: <FAQs /> },
       
           { path: "profile", element: <Profile /> },
-          { path: "property-rentals-update", element: <PropertiesRentalsDetails/> },
+          { path: "property-rentals-details", element: <PropertiesRentalsDetails/> },
         ],
       },
     ],

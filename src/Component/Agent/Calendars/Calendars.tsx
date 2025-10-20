@@ -127,7 +127,7 @@ const CalendarCard = ({ data }) => {
                         rel="noopener noreferrer"
                         className="flex items-center justify-center flex-1 px-4 py-2 text-sm font-medium text-white bg-teal-500 border border-teal-500 rounded-lg hover:bg-teal-600 transition duration-150 shadow-md"
                     >
-                        <ArrowUpRight className="w-4 h-4 mr-2" />
+                       <img className='mr-2' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760910125/Icon_26_tmwde2.png" alt="" />
                         Open Calendar
                     </a>
                 </div>
@@ -135,7 +135,7 @@ const CalendarCard = ({ data }) => {
                 {/* Calendar URL Display */}
                 <div className="mt-auto pt-2">
                     <p className="text-xs font-medium text-gray-600 mb-1">Calendar URL</p>
-                    <p className="text-sm text-blue-600 truncate">{calendarUrl}</p>
+                    <p className="text-sm text-[#0F172A] truncate">{calendarUrl}</p>
                 </div>
             </div>
         </div>

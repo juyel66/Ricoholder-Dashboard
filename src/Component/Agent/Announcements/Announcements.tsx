@@ -110,7 +110,7 @@ const UpdateCard = ({ update }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center space-x-4">
-            <Clock className="w-5 h-5 text-red-500 flex-shrink-0" />
+           <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760910352/Container_3_l81okq.png" alt="" />
             <span className="text-base font-medium text-gray-800">{update.title}</span>
             <PriorityBadge priority={update.priority} />
             
@@ -172,7 +172,7 @@ const Announcements = () => {
     const categories = ['All', 'Branding', 'Templates', 'Legal Forms', 'Training', 'Market Research', 'External Tools'];
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans p-4 md:p-8">
+        <div className=" bg-gray-50 font-sans p-4 md:p-8">
             <div className=" mx-auto">
                 
                 {/* Header Section */}
@@ -184,16 +184,27 @@ const Announcements = () => {
                 {/* Search and Category Filter Bar */}
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 space-y-4 lg:space-y-0">
                     {/* Search Bar */}
-                    <div className="relative flex-grow gap-2  lg:w-1/3">
-                        <input
-                            type="text"
-                            placeholder="Search Resources..."
-                            className="w-full  pl-4 pr-12 py-3 border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 transition shadow-sm"
-                        />
-                        <button className="absolute  right-0 top-0 h-full px-4 text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        </button>
-                    </div>
+             <div className="flex items-center border rounded-lg px-3 py-2 w-full max-w-lg">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-5 h-5 mr-2" // 👈 gap on left side (space between icon and placeholder)
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M21 21l-4.35-4.35m1.1-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+    />
+  </svg>
+  <input
+    type="text"
+    placeholder="Search Resources..."
+    className="outline-none w-full text-sm"
+  />
+</div>
                     
                     {/* Category Tabs */}
                     <div className="overflow-x-auto ml-5 whitespace-nowrap scrollbar-hide">

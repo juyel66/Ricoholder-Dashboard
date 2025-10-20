@@ -26,7 +26,7 @@ interface Property {
 const initialProperties: Property[] = [
   {
     id: 5234234234,
-    title: "Modern Downtown Penthouse",
+    title: "Historic Victorian Home",
     address: "10 Heritage Lane, Boston, MA",
     price: 3100000,
     bedrooms: 6,
@@ -34,11 +34,11 @@ const initialProperties: Property[] = [
     pool: 3,
     status: "pending",
     imageUrl:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1560448073-4119a5a86f5e?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 23523542342,
-    title: "Historic Victorian Home",
+    title: "Modern Downtown Penthouse",
     address: "456 Sky Tower, New York, NY",
     price: 2800000,
     bedrooms: 3,
@@ -46,7 +46,7 @@ const initialProperties: Property[] = [
     pool: 6,
     status: "published",
     imageUrl:
-      "https://images.unsplash.com/photo-1560448073-4119a5a86f5e?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 3234234234,
@@ -69,7 +69,8 @@ const initialProperties: Property[] = [
     bathrooms: 6,
     pool: 5,
     status: "published",
-    imageUrl:" https://images.unsplash.com/photo-1505691723518-22f6e81caa36?auto=format&fit=crop&w=400&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 4234234234,
@@ -260,7 +261,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
 };
 
 // --- 4. MAIN APP ---
-const PropertiesSales: React.FC = () => {
+const PropertiesRentals: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Search icon kept here as it's part of the global search input, not the property card
@@ -281,7 +282,7 @@ const PropertiesSales: React.FC = () => {
       <div className="mx-auto">
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
-            Properties-Sales
+            Properties-Rentals
           </h1>
           <p className="text-gray-600 text-sm">
             Access your assigned rental properties and marketing materials.
@@ -327,4 +328,4 @@ const PropertiesSales: React.FC = () => {
   );
 };
 
-export default PropertiesSales;
+export default PropertiesRentals;

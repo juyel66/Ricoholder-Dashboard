@@ -57,12 +57,14 @@ const FAQItem = ({ faq }) => {
       >
         <span className="text-base font-medium text-gray-800 flex-grow pr-4">{faq.question}</span>
         
-        {/* Toggle Icon */}
-        {isOpen ? (
-            <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
-        ) : (
-            <ChevronRight className="w-5 h-5 text-gray-500 flex-shrink-0" />
-        )}
+        {/* Toggle Icon with border and rounded full */}
+        <div className="border border-gray-300 rounded-full p-1 flex items-center justify-center">
+          {isOpen ? (
+              <ChevronDown className="w-5 h-5 text-gray-600" />
+          ) : (
+              <ChevronRight className="w-5 h-5 text-gray-600" />
+          )}
+        </div>
       </div>
       
       {/* Answer Body (Collapsible) */}
@@ -74,8 +76,6 @@ const FAQItem = ({ faq }) => {
             <p className="text-sm text-gray-600 leading-relaxed">
                 {faq.answer}
             </p>
-            {/* Optional Category Tag for internal debugging */}
-            {/* <p className="text-xs text-blue-500 mt-3">Category: {faq.category}</p> */}
         </div>
       </div>
     </div>
@@ -84,10 +84,7 @@ const FAQItem = ({ faq }) => {
 
 // --- 3. MAIN APPLICATION COMPONENT ---
 const FAQs = () => {
-    // Current active category for the filter bar (Matches the image default: All Categories is dark)
     const [activeCategory, setActiveCategory] = useState('All Categories');
-    
-    // State for search input
     const [searchTerm, setSearchTerm] = useState('');
 
     const categories = [
@@ -99,18 +96,12 @@ const FAQs = () => {
         'Technical Support'
     ];
     
-    // Filtering logic
     const filteredFAQs = faqData.filter(faq => {
-        // 1. Filter by category
         const categoryMatch = activeCategory === 'All Categories' || faq.category === activeCategory;
-        
-        // 2. Filter by search term
         const searchMatch = faq.question.toLowerCase().includes(searchTerm.toLowerCase()) || 
                             faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
-                            
         return categoryMatch && searchMatch;
     });
-
 
     return (
         <div className="font-sans p-4 md:p-8">
@@ -124,38 +115,38 @@ const FAQs = () => {
                 
                 {/* Search and Category Filter Bar */}
                 <div className="flex flex-col mb-8 space-y-4">
+                    <div className='flex items-center border-2 p-2 rounded-xl gap-2'>
+                        <div className="relative flex-grow">
+                            <input
+                                type="text"
+                                placeholder="Search FAQs..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg text-base focus:ring-gray-900 focus:border-gray-900 transition shadow-sm"
+                            />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        </div>
                     
-                    {/* Search Bar */}
-                    <div className="relative flex-grow">
-                        <input
-                            type="text"
-                            placeholder="Search FAQs..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg text-base focus:ring-gray-900 focus:border-gray-900 transition shadow-sm"
-                        />
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    </div>
-                    
-                    {/* Category Tabs */}
-                    <div className="overflow-x-auto whitespace-nowrap scrollbar-hide">
-                        <div className="inline-flex space-x-2 p-1 bg-white border border-gray-200 rounded-xl shadow-sm">
-                            {categories.map((category) => (
-                                <button
-                                    key={category}
-                                    onClick={() => {
-                                        setActiveCategory(category);
-                                        setSearchTerm(''); // Clear search when category changes
-                                    }}
-                                    className={`px-4 py-2 text-sm font-medium rounded-lg transition duration-200 ${
-                                        activeCategory === category
-                                            ? 'bg-gray-900 text-white shadow-md' // Active state
-                                            : 'text-gray-700 hover:bg-gray-100' // Inactive state
-                                    }`}
-                                >
-                                    {category}
-                                </button>
-                            ))}
+                        {/* Category Tabs */}
+                        <div className="overflow-x-auto whitespace-nowrap scrollbar-hide">
+                            <div className="inline-flex space-x-2 p-1 rounded-xl shadow-sm">
+                                {categories.map((category) => (
+                                    <button
+                                        key={category}
+                                        onClick={() => {
+                                            setActiveCategory(category);
+                                            setSearchTerm('');
+                                        }}
+                                        className={`px-4 py-2 text-sm font-medium rounded-lg transition duration-200 ${
+                                            activeCategory === category
+                                                ? 'bg-gray-900 text-white shadow-md'
+                                                : 'text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +163,6 @@ const FAQs = () => {
                         </p>
                     )}
                 </main>
-                
             </div>
         </div>
     );
