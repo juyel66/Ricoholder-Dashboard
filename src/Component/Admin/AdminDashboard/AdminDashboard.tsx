@@ -68,13 +68,13 @@ const AdminDashboard = () => {
             {/* --- Action Buttons --- */}
             <div className="flex flex-col sm:flex-row gap-4 py-6">
                 <Button className="bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150">
-                    <PlusCircle className="h-5 w-5 text-teal-600" /> Create Property
+                    <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_36_ptz5ii.png" alt="" /> Create Property
                 </Button>
                 <Button className="bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150">
-                    <UsersIcon className="h-5 w-5 text-teal-600" /> Add Agent
+                    <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_38_h9ps9e.png" alt="" />  Add Agent
                 </Button>
                 <Button className="bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150">
-                    <UploadCloud className="h-5 w-5 text-teal-600" /> Bulk Upload
+                   <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_37_ajwrle.png" alt="" /> Bulk Upload
                 </Button>
             </div>
 
@@ -103,7 +103,7 @@ const AdminDashboard = () => {
                     </div>
                 </div>
             </div>
-
+ 
             {/* --- Recent Properties & Activity --- */}
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4'>
 

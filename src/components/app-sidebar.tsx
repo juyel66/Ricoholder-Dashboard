@@ -10,8 +10,8 @@ import { LogOut } from "lucide-react";
 
 const doctor_routes = [
   { title: "Dashboard", url: "/admin-dashboard", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835665/Icon_5_syy9ka.png" },
-  { title: "Properties-Rentals", url: "/properties", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835665/Icon_6_zia1hb.png" },
-   { title: "Properties-Sales", url: "/properties", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760836092/Icon_13_cnv9is.png" },
+  { title: "Properties-Rentals", url: "/properties-rentals", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835665/Icon_6_zia1hb.png" },
+   { title: "Properties-Sales", url: "/properties-sales", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760836092/Icon_13_cnv9is.png" },
   { title: "Agent", url: "/agent", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835907/Icon_12_hrpcfu.png" },
   { title: "Media Library", url: "/media-library", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835779/Icon_9_v2svx7.png" },
   { title: "Analytics", url: "/analytics", img: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760835778/Icon_10_pwt0qy.png" },
@@ -29,7 +29,7 @@ const patient_routes = [
 ];
 
 const AppSidebar = () => {
-  const role = "AGENT";
+  const role = "ADMIN";
 
   const routesToRender =
     role === "ADMIN" ? doctor_routes : role === "AGENT" ? patient_routes : [];
