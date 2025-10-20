@@ -68,7 +68,7 @@ const AdminDashboard = () => {
             {/* --- Action Buttons --- */}
             <div className="flex flex-col sm:flex-row gap-4 py-6">
                 <Button className="bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150">
-                    <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_36_ptz5ii.png" alt="" /> Create Property
+                    <img className='' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_36_ptz5ii.png" alt="" /> Create Property
                 </Button>
                 <Button className="bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150">
                     <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760922664/Icon_38_h9ps9e.png" alt="" />  Add Agent
@@ -82,22 +82,22 @@ const AdminDashboard = () => {
             <div className="mb-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div className="bg-white rounded-lg border-2 border-gray-200 p-5 flex flex-col items-start shadow-sm" style={{ minHeight: '120px' }}>
-                        <div className="mb-3"><img className="h-6 w-6 " src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760834371/Icon_4_vocxhj.png" alt="" /> </div>
+                        <div className="mb-3"><img className=" bg-[#00968915] p-3 rounded-lg " src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760834371/Icon_4_vocxhj.png" alt="" /> </div>
                         <div className="text-3xl font-semibold text-gray-800 mb-1">24</div>
                         <div className="text-gray-500 text-sm">Total Properties</div>
                     </div>
                     <div className="bg-white rounded-lg border-2 border-gray-200 p-5 flex flex-col items-start shadow-sm" style={{ minHeight: '120px' }}>
-                        <div className="mb-3"><CheckCircleIcon className="h-6 w-6  text-teal-500" /></div>
+                        <div className="mb-3"><img className='bg-[#00968915]  rounded-lg' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760997613/DashboardView_1_hspyww.png" alt="" /></div>
                         <div className="text-3xl font-semibold text-gray-800 mb-1">18</div>
                         <div className="text-gray-500 text-sm">Active Listings</div>
                     </div>
                     <div className="bg-white rounded-lg border-2 border-gray-200 p-5 flex flex-col items-start shadow-sm" style={{ minHeight: '120px' }}>
-                        <div className="mb-3"><ClockIcon className="h-6 w-6 text-orange-500" /></div>
+                        <div className="mb-3"><img className='bg-[#00968915]  rounded-lg' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760997613/DashboardView_2_j5n7q7.png" alt="" /></div>
                         <div className="text-3xl font-semibold text-gray-800 mb-1">4</div>
                         <div className="text-gray-500 text-sm">Pending Reviews</div>
                     </div>
                     <div className="bg-white rounded-lg border-2 border-gray-200 p-5 flex flex-col items-start shadow-sm" style={{ minHeight: '120px' }}>
-                        <div className="mb-3"><UsersIcon className="h-6 w-6 text-teal-500" /></div>
+                        <div className="mb-3"><img className='bg-[#00968915] rounded-lg' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760997599/DashboardView_3_pfflqc.png" alt="" /></div>
                         <div className="text-3xl font-semibold text-gray-800 mb-1">8</div>
                         <div className="text-gray-500 text-sm">Active Agents</div>
                     </div>

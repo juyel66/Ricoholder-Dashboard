@@ -59,7 +59,7 @@ const AgentCard = ({ agent }) => {
                 </button>
 
                 <Link
-                  to="/manage-property"
+                  to="/admin-manage-property"
                   className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   <Building2 className="w-4 h-4 mr-2" /> Manage Properties
@@ -96,7 +96,7 @@ const AgentCard = ({ agent }) => {
           ></span>
         </div>
 
-        <span className="inline-block px-3 py-1 text-sm font-medium rounded-md bg-purple-100 text-purple-700 mb-6">
+        <span className="inline-block px-3 py-1 text-sm font-medium rounded-md bg-[#ECEEF2] text-black mb-6">
           {agent.role}
         </span>
 
@@ -120,11 +120,11 @@ const AgentCard = ({ agent }) => {
           </div>
           <div className="flex justify-between items-center text-gray-600">
             <span>Permissions</span>
-            <span className="flex items-center font-medium text-blue-600">
+            <span className="flex items-center font-medium text-gray-800">
               {permission}
-              {permission.toLowerCase() === 'download' && (
-                <Download className="w-4 h-4 ml-1" />
-              )}
+
+              
+             
             </span>
           </div>
           <div className="flex justify-between items-center pt-2">

@@ -200,7 +200,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
        <div className="flex items-center flex-wrap gap-3 mt-4 pt-4 border-t border-gray-100">
   {/* View Details */}
   <Link
-    to="/property-rentals-details"
+    to="/           "
     className="flex-1 w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150"
   >
     <img

@@ -23,7 +23,7 @@ const agentData = [
     phone: "+1 (555) 987-6543",
     propertiesCount: 15,
     permissions: "Full Access",
-    status: "inactive",
+    status: "active",
     lastLogin: "2025-10-08 11:15",
   },
   {
@@ -45,7 +45,7 @@ const agentData = [
     phone: "+1 (555) 654-8723",
     propertiesCount: 12,
     permissions: "Full Access",
-    status: "inactive",
+    status: "active",
     lastLogin: "2025-10-06 10:05",
   },
 ];
@@ -156,7 +156,7 @@ const App = () => {
             >
               <IoMdClose className="h-5 w-5" />
             </button>
-            <h2 className="text-xl font-semibold mb-2">Add New Agent/Manager</h2>
+            <h2 className="text-xl font-semibold mb-2">Add New Agent</h2>
             <p className="text-gray-500 mb-4 text-sm">
               Create a new account and set permissions.
             </p>
@@ -199,7 +199,7 @@ const App = () => {
                 className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#009689]"
               >
                 <option>Agent</option>
-                <option>Manager</option>
+                <option>Manager</option> 
               </select>
               <label className="block text-gray-700 text-sm font-medium">Permissions</label>
               <select
@@ -216,7 +216,7 @@ const App = () => {
                 type="submit"
                 className="w-full bg-[#009689] text-white py-2 rounded hover:bg-[#007f73] transition-colors"
               >
-                Create Account
+                Create Agent
               </button>
             </form>
           </div>

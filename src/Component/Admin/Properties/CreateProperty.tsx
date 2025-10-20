@@ -147,7 +147,7 @@ const CreateProperty = () => {
                                     alt="Property Preview"
                                     className="w-full h-full object-cover"
                                 />
-                                <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                                <span className="absolute top-24 left-2 bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">
                                     Primary
                                 </span>
                                 <button
@@ -194,32 +194,37 @@ const CreateProperty = () => {
                     </div>
                 </FormCard>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 justify-center w-full">
-                    <button
-                        type="button"
-                        className="flex items-center justify-center w-full sm:w-auto px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition"
-                    >
-                        Cancel
-                    </button>
+                <div className="flex flex-col gap-3 mt-6 w-full">
+  {/* Create Property Button */}
+  <Link
+    to="/"
+    type="submit"
+    className="flex items-center justify-center w-full px-4 py-2 text-white bg-teal-600 border border-teal-700 rounded-lg hover:bg-teal-700 transition"
+    onClick={(e) => {
+      e.preventDefault();
+      console.log('Form Data:', formData);
+    }}
+  >
+    <img className='mr-2' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760999922/Icon_41_fxo3ap.png" alt="" /> Create Property
+  </Link>
 
-                    <button
-                        type="button"
-                        className="flex items-center justify-center w-full sm:w-auto px-4 py-2 text-blue-700 bg-blue-50 border border-blue-300 rounded-lg hover:bg-blue-100 transition"
-                    >
-                        <Save className="w-5 h-5 mr-2" /> Save as Draft
-                    </button>
+  {/* Save as Draft Button */}
+  <button
+    type="button"
+    className="flex items-center justify-center w-full px-4 py-2 text-blue-700 bg-blue-50 border border-blue-300 rounded-lg hover:bg-blue-100 transition"
+  >
+    <Save className="w-5 h-5 mr-2" /> Save as Draft
+  </button>
 
-                    <Link to="/"
-                        type="submit"
-                        className="flex items-center justify-center w-full sm:w-auto px-4 py-2 text-white bg-teal-600 border border-teal-700 rounded-lg hover:bg-teal-700 transition"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            console.log('Form Data:', formData);
-                        }}
-                    >
-                        <Plus className="w-5 h-5 mr-2" /> Create Property
-                    </Link>
-                </div>
+  {/* Cancel Button */}
+  <button
+    type="button"
+    className="flex items-center justify-center w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+  >
+    Cancel
+  </button>
+</div>
+
             </form>
         </div>
     );

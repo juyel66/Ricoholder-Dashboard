@@ -102,7 +102,7 @@ const ToastNotification = ({ message, type, visible }) => {
     );
 };
 
-const ProjectTable = () => {
+const AdminPropertiesSales = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('All Status');
     const [toast, setToast] = useState({ message: '', type: '', visible: false });
@@ -182,11 +182,11 @@ const ProjectTable = () => {
         <div>
             <div className='flex justify-between items-center mt-5'>
                 <div>
-                    <h1 className='text-3xl font-semibold'>Properties</h1>
+                    <h1 className='text-3xl font-semibold'>Properties-Rentals</h1>
                     <p className='text-gray-500'>Your portfolio, beautifully organized.</p>
                 </div>
                 <Link
-                    to="/create-property"
+                    to="/admin-create-property"
                     className="bg-[#009689] text-white flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150"
                 >
                     <LucideTableProperties className="h-5 w-5" /> Create Property
@@ -335,4 +335,4 @@ const ProjectTable = () => {
     );
 };
 
-export default ProjectTable;
+export default AdminPropertiesSales;
