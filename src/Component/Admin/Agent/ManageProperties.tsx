@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 // --- DEMO DATA ---
 const demoProperties = [
   { id: 1, name: 'Luxury Waterfront Villa', location: 'Miami Beach, FL', status: 'Published', type: 'sales', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', assigned: false },
-  { id: 2, name: 'Modern Downtown Penthouse', location: 'New York, NY', status: 'Published', type: 'sales', imageUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511', assigned: true },
+  { id: 13, name: 'Luxury Waterfront Villa', location: 'Miami Beach, FL', status: 'Published', type: 'sales', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', assigned: false },
+  { id: 2, name: 'Modern Downtown Penthouse', location: 'New York, NY', status: 'Published', type: 'sales', imageUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511', assigned: false },
   { id: 3, name: 'Elegant Historic Mansion', location: 'Boston, MA', status: 'Pending Review', type: 'sales', imageUrl: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154', assigned: false },
   { id: 4, name: 'Contemporary Beach House', location: 'Malibu, CA', status: 'Draft', type: 'rentals', imageUrl: 'https://images.unsplash.com/photo-1600607689390-1d5c2a3f0c4f', assigned: false },
-  { id: 5, name: 'Stylish City Apartment', location: 'Seattle, WA', status: 'Published', type: 'rentals', imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2', assigned: true },
+  { id: 5, name: 'Stylish City Apartment', location: 'Seattle, WA', status: 'Published', type: 'rentals', imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2', assigned: false },
 ];
 
 // --- HELPER COMPONENTS ---
@@ -37,14 +38,14 @@ const PropertyStatusBadge = ({ status }) => {
 const PropertyListItem = ({ property, isSelected, onToggle }) => (
   <div
     className={`flex items-center justify-between p-4 rounded-xl cursor-pointer transition duration-150 border w-full ${
-      isSelected ? 'border-blue-500 bg-blue-50 shadow-md' : 'border-gray-200 bg-white hover:bg-gray-50'
+      isSelected ? 'border-gray-500 bg-blue-50 shadow-md' : 'border-gray-200 bg-white hover:bg-gray-50'
     }`}
     onClick={() => onToggle(property.id)}
   >
     <div className="flex items-center flex-grow min-w-0">
       <div
         className={`w-5 h-5 mr-4 flex items-center justify-center border-2 rounded-full transition duration-150 ${
-          isSelected ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-400'
+          isSelected ? 'bg-gray-600 border-gray-600' : 'bg-white border-gray-400'
         }`}
       >
         {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
@@ -95,8 +96,8 @@ const ManageProperties = () => {
   const filteredProperties = properties.filter(p => p.type === activeTab);
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6 md:p-10 flex flex-col items-center">
-      <div className="w-full bg-white rounded-xl shadow-2xl p-6 md:p-8">
+    <div className="  p-6 md:p-10   flex flex-col items-center">
+      <div className="w-full bg-white rounded-xl  p-6 md:p-8">
 
         {/* Header */}
         <header className="mb-8 border-b border-gray-100 pb-4">
@@ -114,8 +115,11 @@ const ManageProperties = () => {
           <p className="text-xl font-medium text-gray-500 mt-1">{agentName}</p>
         </header>
 
+
+         <h2 className="text-lg font-semibold text-gray-700 mb-4">Select Properties</h2>
+
         {/* Tabs */}
-        <div className="flex gap-3 mb-6">
+        <div className="flex  gap-3 mb-6">
           <button
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition ${
               activeTab === 'sales'
@@ -141,7 +145,7 @@ const ManageProperties = () => {
 
         {/* Property Selection List */}
         <main className="space-y-4 mb-8">
-          <h2 className="text-lg font-semibold text-gray-700">Select Properties</h2>
+         
           <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
             {filteredProperties.map((property) => (
               <PropertyListItem
