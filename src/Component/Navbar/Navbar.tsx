@@ -61,14 +61,13 @@ const Navbar = () => {
           <div className="flex items-center gap-4 pb-2 pt-2" ref={dropdownRef}>
             {/* Notification Icon with Dropdown */}
             <div className="relative text-4xl mb-2 cursor-pointer" onClick={toggleDropdown}>
-              <IoMdNotificationsOutline />
-              {isDropdownOpen && (
+              {/* <IoMdNotificationsOutline /> */}
+              <img className="h-12 w-12" src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1761005969/Button_2_hee1qa.png" alt="" />
+              {/* {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg border border-gray-200 z-50">
-                  <p className="p-3 text-gray-700 border-b border-gray-200">Notification 1</p>
-                  <p className="p-3 text-gray-700 border-b border-gray-200">Notification 2</p>
-                  <p className="p-3 text-gray-700">Notification 3</p>
+                 <p className="p-5">do not have any notifications</p>
                 </div>
-              )}
+              )} */}
             </div>
 
             <div>
