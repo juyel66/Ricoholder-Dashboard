@@ -21,7 +21,7 @@ const AdminDashboard = () => {
         { id: 1, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554174/Image_Luxury_Modern_Villa_with_Pool_sdpezo.png", title: "Luxury Modern Villa with Pool", price: "$2,850,000", status: "Published" },
         { id: 2, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554255/Image_Downtown_Penthouse_with_City_Views_gfrhxe.png", title: "Downtown Penthouse with City Views", price: "$1,650,000", status: "Pending Review" },
         { id: 3, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554174/Image_Luxury_Modern_Villa_with_Pool_sdpezo.png", title: "Elegant Suburban Estate", price: "$3,200,000", status: "Draft" },
-        { id: 4, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554255/Image_Downtown_Penthouse_with_City_Views_gfrhxe.png", title: "Ocean View Apartment", price: "$850,000", status: "Sold" },
+        { id: 4, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554255/Image_Downtown_Penthouse_with_City_Views_gfrhxe.png", title: "Ocean View Apartment", price: "$850,000", status: "Published" },
         { id: 5, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554174/Image_Luxury_Modern_Villa_with_Pool_sdpezo.png", title: "Charming Lake House", price: "$1,200,000", status: "Draft" },
         { id: 6, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554255/Image_Downtown_Penthouse_with_City_Views_gfrhxe.png", title: "Spacious Family Home", price: "$950,000", status: "Draft" },
         { id: 7, image: "https://res.cloudinary.com/dqkczdjjs/image/upload/v1760554174/Image_Luxury_Modern_Villa_with_Pool_sdpezo.png", title: "Cozy Studio Flat", price: "$450,000", status: "Pending Review" },
@@ -44,8 +44,8 @@ const AdminDashboard = () => {
     const getPropertyStatusClass = (status) => {
         const normalizedStatus = status.toLowerCase();
         return (
-            normalizedStatus === 'published' ? 'border border-green-500' :
-            normalizedStatus === 'pending review' ? 'border border-orange-500' :
+            normalizedStatus === 'published' ? 'border bg-green-50 text-green-600 border-green-500' :
+            normalizedStatus === 'pending review' ? 'border bg-orange-50 text-orange-600 border-orange-500' :
             normalizedStatus === 'draft' ? 'border border-gray-400' :
             normalizedStatus === 'sold' ? 'border border-red-500' :
             'border border-blue-500'
@@ -55,15 +55,15 @@ const AdminDashboard = () => {
     const getActivityStatusClass = (status) => {
         const normalizedStatus = status.toLowerCase();
         return (
-            normalizedStatus === 'live' ? 'border border-teal-500' :
-            normalizedStatus === 'pending' ? 'border border-orange-500' :
-            normalizedStatus === 'updated' ? 'border border-blue-500' :
+            normalizedStatus === 'live' ? 'border bg-teal-50 text-teal-600 border-teal-500' :
+            normalizedStatus === 'pending' ? 'border bg-orange-50 text-orange-600 border-orange-500' :
+            normalizedStatus === 'updated' ? 'border bg-blue-50 text-blue-600 border-blue-500' :
             'border border-gray-400'
         );
     };
 
     return (
-        <div className="p-4 bg-gray-50 min-h-screen">
+        <div className="">
 
             {/* --- Action Buttons --- */}
             <div className="flex flex-col sm:flex-row gap-4 py-6">
