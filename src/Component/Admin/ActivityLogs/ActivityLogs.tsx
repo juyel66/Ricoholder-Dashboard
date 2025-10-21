@@ -89,9 +89,9 @@ const ActivityLogs = () => {
         
                     <div className="flex items-center gap-4">
                         <div
-                        className="bg-gray-200 border-2 border-gray-300 text-black flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150 cursor-pointer hover:bg-gray-300"
+                        className="bg-gray-100 border-2 border-gray-300 text-black flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm transition-colors duration-150 cursor-pointer hover:bg-gray-300"
                         >
-                        <PiExportThin className="h-5 w-5" /> Export Log
+                        <img src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1761005671/Icon_43_rivr8o.png" alt="" /> Export Log
                         </div>
                     </div>
                 </div>
