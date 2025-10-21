@@ -88,12 +88,14 @@ const AgentCard = ({ agent }) => {
         {/* Agent Info */}
         <div className="flex items-center gap-2 mb-1">
           <h2 className="text-2xl font-semibold text-gray-800">{agent.name}</h2>
-          <span
+
+          {/* <span
             className={`h-3 w-3 rounded-full ${
               agent.status.toLowerCase() === 'active' ? 'bg-green-500' : 'bg-red-500'
             }`}
             title={agent.status}
-          ></span>
+          ></span> */}
+          
         </div>
 
         <span className="inline-block px-3 py-1 text-sm font-medium rounded-md bg-[#ECEEF2] text-black mb-6">
