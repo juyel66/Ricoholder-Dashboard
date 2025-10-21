@@ -29,7 +29,7 @@ const AGENT = [
 ];
 
 const AppSidebar = () => {
-  const role = "ADMIN";
+  const role = "AGENT";
 
   const routesToRender =
     role === "ADMIN" ? ADMIN : role === "AGENT" ? AGENT : [];

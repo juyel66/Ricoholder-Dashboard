@@ -40,7 +40,7 @@ const resourceData = [
     fileType: 'document',
     title: 'Website Asset Pack',
     description: 'High-resolution images, videos, and branding elements for external website use.',
-    category: 'Branding',
+    category: 'Legal Forms',
     downloadUrl: '#',
   },
   {
@@ -56,7 +56,7 @@ const resourceData = [
     fileType: 'document',
     title: 'External Listing Platform APIs',
     description: 'Technical documentation for integrating with external property listing platforms.',
-    category: 'Branding',
+    category: 'Legal Forms',
     downloadUrl: '#',
   },
 ];

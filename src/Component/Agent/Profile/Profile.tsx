@@ -326,9 +326,11 @@ const Profile = () => {
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6 mb-6">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gray-200 text-gray-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-white shadow-inner">
+              <div className="w-16  h-16 bg-gray-200 text-gray-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-white shadow-inner">
                 {mainCardInitials}
               </div>
+
+              <img className='absolute ml-10 mt-10' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1761008036/Button_3_xrz3oo.png" alt="" />
               <div>
                 <h2 className="text-xl font-semibold text-gray-900">
                   {profileData.personalInfo.fullName}
