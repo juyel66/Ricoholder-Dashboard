@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const userInfo = isAdmin
     ? { name: "Admin User", role: "Super Admin" }
-    : { name: "Md Juyel Rana", role: "Agent" };
+    : { name: "Juyel", role: "Agent" };
 
   // ------------------------------
   // Dropdown state & ref

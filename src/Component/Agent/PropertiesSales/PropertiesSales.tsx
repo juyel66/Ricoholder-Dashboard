@@ -136,7 +136,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
               <p className="font-semibold text-gray-800">{bathrooms}</p>
             </div>
             <div>
-              <p className="text-gray-500 text-xs uppercase">Pool</p>
+              <p className="text-gray-500 text-xs uppercase">Pools</p>
               <p className="font-semibold text-gray-800">{pool}</p>
             </div>
           </div>
