@@ -125,7 +125,7 @@ const AdminDashboard = () => {
                                     <h3 className="text-base font-medium text-gray-800 line-clamp-1">{property.title}</h3>
                                     <p className="text-gray-600 text-sm">{property.price}</p>
                                 </div>
-                                <div className={`px-3 py-1 text-xs font-medium rounded-full flex-1 ${getPropertyStatusClass(property.status)}`}>
+                                <div className={`px-3 py-1 text-xs font-medium rounded-full  ${getPropertyStatusClass(property.status)}`}>
                                     {property.status}
                                 </div>
                             </div>
