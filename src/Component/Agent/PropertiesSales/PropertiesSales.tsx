@@ -17,7 +17,7 @@ interface Property {
 
 // --- DEMO PROPERTY DATA ---
 const initialProperties: Property[] = [
-  {
+    {
     id: 5234234234,
     title: "Modern Downtown Penthouse",
     address: "10 Heritage Lane, Boston, MA",
@@ -53,6 +53,7 @@ const initialProperties: Property[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1600585154512-441fea2b5c0f?auto=format&fit=crop&w=400&q=80",
   },
+
 ];
 
 // --- PRICE FORMATTER ---
@@ -75,7 +76,9 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
     else if (status === "draft") bgColor = "bg-yellow-100 text-yellow-700";
     else if (status === "pending") bgColor = "bg-blue-100 text-blue-700";
     return (
-      <span className={`text-xs font-semibold py-1 px-3 rounded-full ${bgColor}`}>
+      <span
+        className={`text-xs font-semibold py-1 px-3 rounded-full ${bgColor}`}
+      >
         {status}
       </span>
     );
@@ -94,7 +97,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
   return (
     <div className="bg-white p-5 rounded-xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-5 mb-6 w-full">
       {/* Image */}
-      <div className="w-full md:w-56 h-48 md:h-auto flex-shrink-0">
+      <div className="w-full md:w-48 lg:w-52 h-44 md:h-auto flex-shrink-0">
         <img
           src={imageUrl}
           alt={title}
@@ -109,19 +112,16 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
       {/* Details */}
       <div className="flex-grow flex flex-col justify-between">
         <div>
-          {/* Header */}
           <div className="flex justify-between items-start mb-2">
             <h2 className="text-lg font-bold text-gray-900 truncate">{title}</h2>
             <StatusBadge status={status} />
           </div>
 
-          {/* Address */}
           <p className="text-sm text-gray-500 flex items-center mb-3">
             <MapPin className="w-4 h-4 mr-1 text-gray-400" />
             {address}
           </p>
 
-          {/* Property Info */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-2 text-sm">
             <div>
               <p className="text-gray-500 text-xs uppercase">Price</p>
@@ -143,60 +143,66 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
         </div>
 
         {/* Inline Buttons */}
-        <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-3 mt-4 pt-4 border-t border-gray-100">
-  <Link
-    to="/agent-property-rentals-details"
-    className="flex w-full items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-  >
-    <img
-      src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_29_mqukty.png"
-      alt=""
-      className="h-5"
-    />
-    View Details
-  </Link>
+        <div
+          className="flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 mt-4 pt-4 border-t border-gray-100"
+          style={{
+            rowGap: "8px",
+          }}
+        >
+          <Link
+            to="/agent-property-rentals-details"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 w-full bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition whitespace-nowrap"
+          >
+            <img
+              src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_29_mqukty.png"
+              alt=""
+              className="h-4 w-4"
+            />
+            View Details
+          </Link>
 
-  <button
-    onClick={() => copyToClipboard("Description copied", "Description")}
-    className="flex w-full items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-  >
-    <img
-      src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_30_lfzqbf.png"
-      alt=""
-      className="h-5"
-    />
-    Copy Description
-  </button>
+          <button
+            onClick={() => copyToClipboard("Description copied", "Description")}
+            className="flex w-full items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition whitespace-nowrap"
+          >
+            <img
+              src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_30_lfzqbf.png"
+              alt=""
+              className="h-4 w-4"
+            />
+            Copy Description
+          </button>
 
-  <button
-    onClick={() => copyToClipboard("Calendar link copied", "Calendar Link")}
-    className="flex w-full items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-  >
-    <img
-      src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_31_evyeki.png"
-      alt=""
-      className="h-5"
-    />
-    Copy Calendar Link
-  </button>
+          <button
+            onClick={() =>
+              copyToClipboard("Calendar link copied", "Calendar Link")
+            }
+            className="flex w-full items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition whitespace-nowrap"
+          >
+            <img
+              src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_31_evyeki.png"
+              alt=""
+              className="h-4 w-4"
+            />
+            Copy Calendar Link
+          </button>
 
-  <button className="flex w-full items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-    <img
-      src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_32_a4vr39.png"
-      alt=""
-      className="h-5"
-    />
-    Download Images
-  </button>
-</div>
-
+          <button className="flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 w-full bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition whitespace-nowrap">
+            <img
+              src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760915210/Icon_32_a4vr39.png"
+              alt=""
+              className="h-4 w-4"
+            />
+            Download Images
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 // --- MAIN COMPONENT ---
-const PropertiesSales: React.FC = () => {
+const PropertiesRentals: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredProperties = useMemo(() => {
@@ -235,8 +241,28 @@ const PropertiesSales: React.FC = () => {
           <PropertyCard key={property.id} property={property} />
         ))}
       </div>
+
+      {/* Extra responsive tuning for mid-size devices */}
+      <style>
+        {`
+          @media (min-width: 1200px) and (max-width: 1450px) {
+            .flex-wrap button,
+            .flex-wrap a {
+              padding: 0.5rem 0.7rem !important;
+              font-size: 0.85rem !important;
+            }
+            .flex-wrap img {
+              height: 14px !important;
+              width: 14px !important;
+            }
+            .md\\:w-56, .lg\\:w-52 {
+              width: 11rem !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
 
-export default PropertiesSales;
+export default PropertiesRentals;
