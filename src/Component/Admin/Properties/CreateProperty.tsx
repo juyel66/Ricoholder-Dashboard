@@ -97,7 +97,7 @@ const CreateProperty = () => {
     return (
         <div className="p-6 md:p-10 bg-gray-50 min-h-screen w-full">
 
-              <Link to="/properties"
+              <Link to="/admin-properties-rentals"
                         className="flex items-center text-gray-500 hover:text-gray-800 transition-colors mb-4"
                         onClick={() => console.log('Back button clicked')}
                         aria-label="Back to Agent List"

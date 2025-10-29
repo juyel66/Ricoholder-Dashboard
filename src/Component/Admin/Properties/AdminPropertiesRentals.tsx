@@ -120,6 +120,11 @@ const AdminPropertiesRentals = () => {
   const [toast, setToast] = useState({ message: "", type: "", visible: false });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const [data, setData] = useState(projectData);
+
+  // --- Modal State ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editItem, setEditItem] = useState(null);
 
   const availableStatuses = ["All Status", "published", "pending", "draft"];
 
@@ -142,7 +147,11 @@ const AdminPropertiesRentals = () => {
   };
 
   const handleEdit = (id) => {
-    showToast(`Editing project ${id}`, "success");
+    const found = data.find((item) => item.id === id);
+    if (found) {
+      setEditItem({ ...found });
+      setIsModalOpen(true);
+    }
   };
 
   const handleDelete = (id) => {
@@ -156,6 +165,8 @@ const AdminPropertiesRentals = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        const newData = data.filter((item) => item.id !== id);
+        setData(newData);
         Swal.fire({
           title: "Deleted!",
           text: `Project ${id} has been deleted.`,
@@ -171,7 +182,7 @@ const AdminPropertiesRentals = () => {
   }, [searchTerm, statusFilter]);
 
   const filteredProjects = useMemo(() => {
-    return projectData.filter((project) => {
+    return data.filter((project) => {
       const statusMatch =
         statusFilter === "All Status" ||
         project.status.toLowerCase() === statusFilter.toLowerCase();
@@ -182,7 +193,7 @@ const AdminPropertiesRentals = () => {
         project.type.toLowerCase().includes(searchLower);
       return statusMatch && searchMatch;
     });
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, statusFilter, data]);
 
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -194,6 +205,15 @@ const AdminPropertiesRentals = () => {
 
   const paginate = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) setCurrentPage(pageNumber);
+  };
+
+  const handleModalSave = () => {
+    const updated = data.map((item) =>
+      item.id === editItem.id ? editItem : item
+    );
+    setData(updated);
+    setIsModalOpen(false);
+    showToast(`Project ${editItem.id} updated successfully!`, "success");
   };
 
   return (
@@ -393,6 +413,96 @@ const AdminPropertiesRentals = () => {
           )}
         </div>
       </div>
+
+      {/* --- EDIT MODAL --- */}
+      {isModalOpen && editItem && (
+        <div className="fixed inset-0  bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg overflow-y-auto max-h-[90vh]">
+            <h2 className="text-xl font-semibold mb-4">
+              Edit Project (ID: {editItem.id})
+            </h2>
+            <div className="space-y-3">
+              <label className="block text-sm font-medium">Title</label>
+              <input
+                type="text"
+                value={editItem.title}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, title: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              />
+
+              <label className="block text-sm font-medium">Details</label>
+              <input
+                type="text"
+                value={editItem.details}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, details: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              />
+
+              <label className="block text-sm font-medium">Location</label>
+              <input
+                type="text"
+                value={editItem.location}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, location: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              />
+
+              <label className="block text-sm font-medium">Price</label>
+              <input
+                type="text"
+                value={editItem.price}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, price: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              />
+
+              <label className="block text-sm font-medium">Type</label>
+              <input
+                type="text"
+                value={editItem.type}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, type: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              />
+
+              <label className="block text-sm font-medium">Status</label>
+              <select
+                value={editItem.status}
+                onChange={(e) =>
+                  setEditItem({ ...editItem, status: e.target.value })
+                }
+                className="w-full border rounded p-2"
+              >
+                <option value="published">Published</option>
+                <option value="pending">Pending</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                className="bg-gray-200 text-gray-700"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleModalSave}
+                className="bg-blue-600 text-white"
+              >
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

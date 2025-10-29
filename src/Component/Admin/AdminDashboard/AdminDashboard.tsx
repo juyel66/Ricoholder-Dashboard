@@ -45,7 +45,7 @@ const AdminDashboard = () => {
         const normalizedStatus = status.toLowerCase();
         return (
             normalizedStatus === 'published' ? 'border bg-green-50 text-green-600 border-green-500' :
-            normalizedStatus === 'pending review' ? 'border bg-orange-50 text-orange-600 border-orange-500' :
+            normalizedStatus === 'pending review' ? 'border bg-orange-50  text-orange-600 border-orange-500' :
             normalizedStatus === 'draft' ? 'border border-gray-400' :
             normalizedStatus === 'sold' ? 'border border-red-500' :
             'border border-blue-500'
@@ -125,7 +125,7 @@ const AdminDashboard = () => {
                                     <h3 className="text-base font-medium text-gray-800 line-clamp-1">{property.title}</h3>
                                     <p className="text-gray-600 text-sm">{property.price}</p>
                                 </div>
-                                <div className={`px-3 py-1 text-xs font-medium rounded-full ${getPropertyStatusClass(property.status)}`}>
+                                <div className={`px-3 py-1 text-xs font-medium rounded-full flex-1 ${getPropertyStatusClass(property.status)}`}>
                                     {property.status}
                                 </div>
                             </div>
