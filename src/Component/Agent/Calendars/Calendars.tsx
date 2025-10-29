@@ -116,7 +116,7 @@ const CalendarCard = ({ data }) => {
                         className="flex items-center justify-center flex-1 px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-300 rounded-lg hover:bg-teal-50 transition duration-150"
                         onClick={() => copyToClipboard(calendarUrl, 'Copy Calendar Link', calendarTitle)}
                     >
-                        <Copy className="w-4 h-4 mr-2" />
+                        <Copy className="w-3 h-3 mr-2" />
                         Copy Link
                     </button>
                     
@@ -125,7 +125,7 @@ const CalendarCard = ({ data }) => {
                         href={calendarUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center flex-1 px-4 py-2 text-sm font-medium text-white bg-teal-500 border border-teal-500 rounded-lg hover:bg-teal-600 transition duration-150 shadow-md"
+                        className="flex  items-center justify-center flex-1 px-4 py-2 text-sm font-medium text-white bg-teal-500 border border-teal-500 rounded-lg hover:bg-teal-600 transition duration-150 shadow-md"
                     >
                        <img className='mr-2' src="https://res.cloudinary.com/dqkczdjjs/image/upload/v1760910125/Icon_26_tmwde2.png" alt="" />
                         Open Calendar
@@ -145,7 +145,7 @@ const CalendarCard = ({ data }) => {
 // --- 4. MAIN APPLICATION COMPONENT ---
 const Calendars = () => {
     return (
-        <div className=" bg-gray-50 font-sans p-4 md:p-8">
+        <div className=" bg-gray-50 font-sans  ">
             <div className=" mx-auto">
                 
                 {/* Header Section */}
@@ -160,6 +160,7 @@ const Calendars = () => {
                         <CalendarCard key={data.id} data={data} />
                     ))}
                 </main>
+               
                 
             </div>
         </div>
