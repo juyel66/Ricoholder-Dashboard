@@ -17,7 +17,7 @@ const projectData = [
   {
     id: 1,
     title: "Luxury Modern Villa with Pool",
-    details: "5 bed · 4 bath · 4 Poll",
+    details: "5 bed, 4 bath ,4 Poll",
     location: "Miami Beach",
     price: "$2,850,000",
     type: "Villa",
@@ -416,8 +416,8 @@ const AdminPropertiesRentals = () => {
 
       {/* --- EDIT MODAL --- */}
       {isModalOpen && editItem && (
-        <div className="fixed inset-0  bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg overflow-y-auto max-h-[90vh]">
+        <div className="fixed inset-0   bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white border-2 border-gray-300 bg-bg-opacity-100 rounded-lg shadow-lg p-6 w-full max-w-lg overflow-y-auto max-h-[90vh]">
             <h2 className="text-xl font-semibold mb-4">
               Edit Project (ID: {editItem.id})
             </h2>
